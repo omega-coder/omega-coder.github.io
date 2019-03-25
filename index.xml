@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>0m3g4K0d3r&#39;s Security Blog</title>
+    <link>https://omega-coder.me/</link>
+    <description>Recent content on 0m3g4K0d3r&#39;s Security Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
+    <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
+    
+	<atom:link href="https://omega-coder.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
