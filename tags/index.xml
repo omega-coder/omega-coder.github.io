@@ -7,9 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
+    <lastBuildDate>Tue, 26 Mar 2019 17:37:37 +0200</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ctf</title>
+      <link>https://omega-coder.me/tags/ctf/</link>
+      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Securinets Ctf</title>
+      <link>https://omega-coder.me/tags/securinets-ctf/</link>
+      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/securinets-ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>https://omega-coder.me/tags/security/</link>
+      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web</title>
+      <link>https://omega-coder.me/tags/web/</link>
+      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Writeup</title>
+      <link>https://omega-coder.me/tags/writeup/</link>
+      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/writeup/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

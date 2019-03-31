@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://omega-coder.me/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -13,7 +19,44 @@
   </url>
   
   <url>
+    <loc>https://omega-coder.me/tags/ctf/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/post/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/securinets-ctf/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/security/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://omega-coder.me/tags/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/web/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/writeup/</loc>
+    <lastmod>2019-03-26T17:37:37+02:00</lastmod>
     <priority>0</priority>
   </url>
   
