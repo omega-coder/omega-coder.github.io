@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/</loc>
+    <lastmod>2018-12-18T01:55:45+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://omega-coder.me/</loc>
     <lastmod>2019-03-26T17:37:37+02:00</lastmod>
     <priority>0</priority>
@@ -21,6 +26,12 @@
   <url>
     <loc>https://omega-coder.me/tags/ctf/</loc>
     <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/nginx/</loc>
+    <lastmod>2018-12-18T01:55:45+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -43,8 +54,20 @@
   </url>
   
   <url>
+    <loc>https://omega-coder.me/tags/streaming/</loc>
+    <lastmod>2018-12-18T01:55:45+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://omega-coder.me/tags/</loc>
     <lastmod>2019-03-26T17:37:37+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/tutorial/</loc>
+    <lastmod>2018-12-18T01:55:45+02:00</lastmod>
     <priority>0</priority>
   </url>
   

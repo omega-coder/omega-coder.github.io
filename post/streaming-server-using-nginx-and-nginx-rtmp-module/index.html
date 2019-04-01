@@ -7,12 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Securinets CTF 2k19 Lost Flag Writeup - 0m3g4K0d3r&#39;s Security Blog</title>
-  <meta property="og:title" content="Securinets CTF 2k19 Lost Flag Writeup" />
-  <meta name="twitter:title" content="Securinets CTF 2k19 Lost Flag Writeup" />
-  <meta name="description" content="Exploiting VCS (Version Control System)">
-  <meta property="og:description" content="Exploiting VCS (Version Control System)">
-  <meta name="twitter:description" content="Exploiting VCS (Version Control System)">
+  <title>Streaming server using NGINX and nginx-rtmp-module - 0m3g4K0d3r&#39;s Security Blog</title>
+  <meta property="og:title" content="Streaming server using NGINX and nginx-rtmp-module" />
+  <meta name="twitter:title" content="Streaming server using NGINX and nginx-rtmp-module" />
+  <meta name="description" content="Setting up HLS &#43; VoD streaming server">
+  <meta property="og:description" content="Setting up HLS &#43; VoD streaming server">
+  <meta name="twitter:description" content="Setting up HLS &#43; VoD streaming server">
   <meta name="author" content="omega_coder"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -48,8 +48,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/",
-          "name": "Securinets c t f 2k19 lost flag writeup"
+          "@id": "https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/",
+          "name": "Streaming server using n g i n x and nginx rtmp module"
         }
     }]
 }
@@ -60,19 +60,15 @@
   "author": {
     "name" : "CHERIEF Yassine"
   },
-  "headline": "Securinets CTF 2k19 Lost Flag Writeup",
-  "description" : "Description    Category Points Solves     Forensics 994 19    
-Description : Help me get back my flag !
-URL: https://web8.ctfsecurinets.com/
-After visiting the link above, we get a login page.We can login using admin/admin, but unfortunately the flag is deleted.
-Then I started searching in the website for any other infos, but with no success. the admin of the challenge (Tr&#39;GFx) said that bruteforcing directories is enough to solve the challenge, so I used dirsearch.",
+  "headline": "Streaming server using NGINX and nginx-rtmp-module",
+  "description" : "Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server.",
   "inLanguage" : "en",
-  "wordCount": 206,
-  "datePublished" : "2019-03-26T17:37:37",
-  "dateModified" : "2019-03-26T17:37:37",
+  "wordCount": 846,
+  "datePublished" : "2018-12-18T01:55:45",
+  "dateModified" : "2018-12-18T01:55:45",
   "image" : "https://omega-coder.me/img/profile_pic.jpg",
-  "keywords" : [ "writeup, ctf, security, securinets-ctf, web" ],
-  "mainEntityOfPage" : "https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/",
+  "keywords" : [ "nginx, streaming, tutorial" ],
+  "mainEntityOfPage" : "https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https://omega-coder.me",
@@ -86,25 +82,25 @@ Then I started searching in the website for any other infos, but with no success
 }
 </script>
 
-<meta property="og:title" content="Securinets CTF 2k19 Lost Flag Writeup" />
-<meta property="og:description" content="Exploiting VCS (Version Control System)">
-<meta property="og:image" content="https://omega-coder.me/img/profile_pic.jpg" />
-<meta property="og:url" content="https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/" />
+<meta property="og:title" content="Streaming server using NGINX and nginx-rtmp-module" />
+<meta property="og:description" content="Setting up HLS &#43; VoD streaming server">
+<meta property="og:image" content="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/b_rgb:000000,o_77/v1545163092/nginx.png" />
+<meta property="og:url" content="https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="0m3g4K0d3r&#39;s Security Blog" />
-  <meta name="twitter:title" content="Securinets CTF 2k19 Lost Flag Writeup" />
-  <meta name="twitter:description" content="Exploiting VCS (Version Control System)">
-  <meta name="twitter:image" content="https://omega-coder.me/img/profile_pic.jpg" />
+  <meta name="twitter:title" content="Streaming server using NGINX and nginx-rtmp-module" />
+  <meta name="twitter:description" content="Setting up HLS &#43; VoD streaming server">
+  <meta name="twitter:image" content="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/b_rgb:000000,o_77/v1545163092/nginx.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@yacine_cherief" />
   <meta name="twitter:creator" content="@yacine_cherief" />
   <link href='https://omega-coder.me/img/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="https://omega-coder.me/img/profile_pic.jpg" />
-  <meta name="twitter:image" content="https://omega-coder.me/img/profile_pic.jpg" />
+  <meta property="og:image" content="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/b_rgb:000000,o_77/v1545163092/nginx.png" />
+  <meta name="twitter:image" content="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/b_rgb:000000,o_77/v1545163092/nginx.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@yacine_cherief" />
   <meta name="twitter:creator" content="@yacine_cherief" />
-  <meta property="og:url" content="https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/" />
+  <meta property="og:url" content="https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="0m3g4K0d3r&#39;s Security Blog" />
 
@@ -239,8 +235,55 @@ if (!doNotTrack) {
 
 
   
+    <div id="header-big-imgs" data-num-img=1 
+      
+         
+          data-img-src-1="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/b_rgb:000000,o_77/v1545163092/nginx.png" 
+         
+         data-img-desc-1="Streaming using NGINX"
+      ></div>
+  
 
-  <header class="header-section ">
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Streaming server using NGINX and nginx-rtmp-module</h1>
+                  
+                    
+                      <h2 class="post-subheading">Setting up HLS &#43; VoD streaming server</h2>
+                    
+                  
+                  
+                    <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;Posted on December 18, 2018
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;846&nbsp;words
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine
+  
+  
+</span>
+
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
     
     <div class="intro-header no-img">
       <div class="container">
@@ -248,25 +291,25 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
               
-                <h1>Securinets CTF 2k19 Lost Flag Writeup</h1>
+                <h1>Streaming server using NGINX and nginx-rtmp-module</h1>
               
               
               
                 
-                  <h2 class="post-subheading">Exploiting VCS (Version Control System)</h2>
+                  <h2 class="post-subheading">Setting up HLS &#43; VoD streaming server</h2>
                 
               
               
                 <span class="post-meta">
   
   
-  <i class="fas fa-calendar"></i>&nbsp;Posted on March 26, 2019
+  <i class="fas fa-calendar"></i>&nbsp;Posted on December 18, 2018
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;206&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;846&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine
@@ -291,72 +334,171 @@ if (!doNotTrack) {
       <article role="main" class="blog-post">
         
 
-<h2 id="description">Description</h2>
+<h1 id="introduction">Introduction</h1>
 
-<table>
-<thead>
-<tr>
-<th><strong>Category</strong></th>
-<th><strong>Points</strong></th>
-<th><strong>Solves</strong></th>
-</tr>
-</thead>
+<p>Most people who do streaming enjoy services like <a href="https://www.twitch.tv/">Twitch.tv</a> in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of <code>people streaming to your server</code>, or you want to stream to multiple places, or any other things that require having access to an actual <code>RTMP</code> stream from an <code>RTMP</code> server.
+In this guide we will cover the very basics of setting up a simple RTMP streaming server on an Ubuntu 16.04 server machine</p>
 
-<tbody>
-<tr>
-<td>Forensics</td>
-<td>994</td>
-<td>19</td>
-</tr>
-</tbody>
-</table>
+<h1 id="what-is-rtmp">What is RTMP ?</h1>
 
-<p><br>
-<br>
-<strong><code>Description</code></strong> : Help me get back my flag !<br />
-<strong><code>URL</code></strong>: <a href="https://web8.ctfsecurinets.com/">https://web8.ctfsecurinets.com/</a></p>
+<p>Real Time Messaging Protocol (RTMP) was initially developed by Macromedia, for streaming on-demand and live media to Adobe Flash applications. It is a TCP-based protocol which maintains persistent connections and is defined as a <code>statefull</code> protocol. This means that from the first time a client connects until the time it disconnects, the streaming server keeps track of the client’s actions. On the other side, HTTP is a <code>stateless</code> application protocol used to deliver hypermedia information across the Internet worldwide</p>
 
-<p>After visiting the link above, we get a login page.We can login using <code>admin/admin</code>, but unfortunately the flag is deleted.</p>
+<h2 id="advantages-of-http-over-rtmp">Advantages of HTTP over RTMP</h2>
 
-<p>Then I started searching in the website for any other infos, but with no success. the admin of the challenge (<strong><code>Tr'GFx</code></strong>) said that <code>bruteforcing</code> directories is enough to solve the challenge, so I used <a href="https://github.com/maurosoria/dirsearch">dirsearch.py</a> to search for directories.</p>
+<ul>
+<li>Less likely to be blocked by firewalls at different levels in the network, RTMP uses default port 1935 which is sometimes blocked, espacially within corporate Firewalls.</li>
+<li>Supported by more CDNs.</li>
+<li>More expertise in customizing HTTP.</li>
+</ul>
 
-<p>Using dirsearch I found <code>/.bzr/README</code>, which means there is a Bazaar repository on the website, Bazaar is like <code>git</code>.</p>
+<h2 id="advantages-of-rtmp-over-http">Advantages of RTMP over HTTP</h2>
+
+<ul>
+<li>Can provide multicast support.</li>
+<li>Security and IP protection, using TLS/SSL or RTMPE.</li>
+<li><strong>Seeking</strong>: when dealing with long-duration media content, the viewer doesn’t have to wait for the video to load before jumping ahead, which is the case for HTTP-delivered videos.</li>
+<li><strong>Reconnect</strong>: when there is a network disruption, the viewer can re-establish a new connection, while the video continues playing from the buffer, as soon as the client re-connects, the buffer will begin filling to avoid disruption in either the video or audio.
+
+<br /></li>
+</ul>
+
+<p><strong>A couple of things you can do with your own RTMP streaming server:</strong></p>
+
+<ul>
+<li>Stream to multiple external channels.</li>
+<li>import other people’s streams.</li>
+</ul>
+
+<p>Now, let’s start bulding our streaming server.<br />
+<code>NOTE</code></p>
 
 <blockquote>
-<p>Bazaar is a version control system that helps you track project history over time and to collaborate easily with others.</p>
+<p>Using Nginx with RTMP module requires compiling nginx from source;<br> dont get afraid!, it’s not that hard</p>
 </blockquote>
 
-<p>We can now use <code>bzr branch</code> utility to clone the remote repository.</p>
+<h2 id="step1-setting-up-a-server">Step1 &mdash; Setting up a server</h2>
 
-<pre><code>bzr branch -Ossl.cert_reqs=none https://web8.ctfsecurinets.com/
+<p>The first step is to set up a server, we will be using an ubuntu server 16.04 LTS as our OS.
+you could install your server in a Raspberry Pi and it will run like a charm, because RTMP is extremely light on system resources.</p>
+
+<h2 id="step-2-installing-nginx-nginx-rtmp-module">Step 2 &mdash; Installing Nginx + nginx-rtmp-module</h2>
+
+<p>Login to your server and make sure your user is in sudoers file, or just login as <code>root</code>.</p>
+
+<p><strong>1- Install Nginx dependencies</strong></p>
+
+<pre><code>sudo apt install build-essential libpcre3 libpcre3-dev libssl-dev
 </code></pre>
 
-<p><code>for cloning a bzr repository use bzr branch and not bzr clone</code></p>
+<p><strong>2- Clone nginx-rtmp-module</strong></p>
 
-<p>After cloning the repo, we can see the log by executing <strong><code>bzr log</code></strong></p>
+<p>We recommend using <a href="https://github.com/sergey-dryabzhinsky/nginx-rtmp-module">this</a> forked module by <code>sergey-dryabzhinsky</code> . it’s being actively worked on and contains more fixes and improvements over the <a href="https://github.com/arut/nginx-rtmp-module">original one</a>.</p>
 
-<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1554052445/bzr_log_lost_flag.png" alt="bzr_log_lost_flag" /></p>
+<pre><code>git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+</code></pre>
 
-<p>We can see that the flag was deleted in the revision number 2, so let&rsquo;s revert back to rev 1.<br />
-We use the command <code>bzr revert -r1</code> to revert back to the revision 1.</p>
+<p><strong>3- Download NGINX</strong></p>
 
-<p>Now we can see the file <code>flag.php</code> which has the flag in it.</p>
+<pre><code>wget http://nginx.org/download/nginx-1.14.2.tar.gz
+tar -xf nginx-1.14.2.tar.gz
+cd nginx-1.14.2
+</code></pre>
 
-<p><code>FLAG: Securinets{BzzzzzzzzZzzzzzzzzzZrR_roCk$}</code>.</p>
+<p>Now comes the compiling step.</p>
+
+<p><strong>4- Compile NGINX</strong></p>
+
+<pre><code>./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+make -j 1 
+sudo make install
+</code></pre>
+
+<p><code>--add-module=../nginx-rtmp-module</code>: the <code>--add-module</code> argument must point to the correct path where nginx-rtmp-module is located.<br />
+<code>-j 1</code>: this is an optional argument for the make command, you can set it to the amount of cpu’s you have on your computer to accelerate the compilation process</p>
+
+<p>Now you should have a running installation of nginx with the nginx-rtmp module included.</p>
+
+<p>By default it installs to <code>/usr/local/nginx</code>, so to start the server run the following command:</p>
+
+<pre><code>sudo /usr/local/nginx/sbin/nginx
+</code></pre>
+
+<h2 id="step-3-configure-nginx-to-use-rtmp">Step 3 &mdash; Configure NGINX to use RTMP.</h2>
+
+<p>NGINX config file is located at <code>/usr/local/nginx/conf/nginx.conf</code>. Open the nginx configuration file using your favourite text editor <code>( it's VIM yeah; you guessed that right!!)</code></p>
+
+<pre><code>sudo vim /usr/local/nginx/conf/nginx.conf
+</code></pre>
+
+<p>Add the following configuration to the end of the configuration file. <code>(Outside the http block)</code>.</p>
+
+<pre><code>rtmp {
+    server {
+        listen 1935;
+        chunk_size 4096;
+        max_connections 100;
+        ping 30s;
+        notify_method get;
+
+        application my_live {
+            live on;
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 3s;
+            hls_playlist_length 60s;
+            
+            # Don't allow RTMP playback
+            deny play all;
+
+        }
+
+
+        application vod {
+            play /usr/local/nginx/rtmp;
+        }
+    }
+}
+</code></pre>
+
+<p><code>NOTE: you have to create a folder where to put your videos.</code></p>
+
+<p>I created a folder called <code>rtmp</code> located in <code>/usr/local/nginx/</code>.</p>
+
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1545171502/rtmp_vod.png" alt="rtmp-vod" /></p>
+
+<p>Now restart your server!.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">sudo /usr/local/nginx/sbin/nginx -s stop
+sudo /usr/local/nginx/sbin/nginx</code></pre></div>
+<p>If your server is already running, you can just reload it, since we only made configurations changes.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">sudo /usr/local/nginx/sbin/nginx -s reload</code></pre></div>
+<h2 id="step-4-testing">Step 4 &mdash; Testing</h2>
+
+<p>We can test our streaming server using VLC media player since it supports RTMP. We will only test the <code>Vod</code> (Video On Demand), we will leave <code>HLS</code> for the next time since it invloves <code>pushing</code> the stream from a remote location and then <code>pulling</code> it again from another location <code>(we can push the stream using the great ffmpeg!)</code></p>
+
+<p><code>NOTE: Make sure the streaming server can be reached from your machine</code></p>
+
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1545172346/ping_test_streaming.png" alt="ping_test_streaming" /></p>
+
+<p>Let’s test our Vod application now.</p>
+
+<video width="720" height="auto" controls>
+  <source src="https://res.cloudinary.com/https-omega-coder-github-io/video/upload/v1545173181/2018-12-18_23-44-04.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<p>Our Vod application is working fine, in the next guide we will discuss live streaming using HLS and the great <code>ffmpeg</code> and we will also use <code>OBS studio</code> to push a live stream to the server.</p>
+
+<p>Thanks for reading!</p>
 
 
         
           <div class="blog-tags">
             
-              <a href="https://omega-coder.me/tags/writeup/">writeup</a>&nbsp;
+              <a href="https://omega-coder.me/tags/nginx/">nginx</a>&nbsp;
             
-              <a href="https://omega-coder.me/tags/ctf/">ctf</a>&nbsp;
+              <a href="https://omega-coder.me/tags/streaming/">streaming</a>&nbsp;
             
-              <a href="https://omega-coder.me/tags/security/">security</a>&nbsp;
-            
-              <a href="https://omega-coder.me/tags/securinets-ctf/">securinets-ctf</a>&nbsp;
-            
-              <a href="https://omega-coder.me/tags/web/">web</a>&nbsp;
+              <a href="https://omega-coder.me/tags/tutorial/">tutorial</a>&nbsp;
             
           </div>
         
@@ -371,49 +513,49 @@ We use the command <code>bzr revert -r1</code> to revert back to the revision 1.
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f&amp;text=Securinets%20CTF%202k19%20Lost%20Flag%20Writeup&amp;via=yacine_cherief" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f&amp;text=Streaming%20server%20using%20NGINX%20and%20nginx-rtmp-module&amp;via=yacine_cherief" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//plus.google.com/share?url=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f" target="_blank" title="Share on Google Plus">
+        <a href="//plus.google.com/share?url=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f" target="_blank" title="Share on Google Plus">
           <i class="fab fa-google-plus"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f&amp;title=Securinets%20CTF%202k19%20Lost%20Flag%20Writeup" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f&amp;title=Streaming%20server%20using%20NGINX%20and%20nginx-rtmp-module" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f&amp;title=Securinets%20CTF%202k19%20Lost%20Flag%20Writeup" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f&amp;title=Streaming%20server%20using%20NGINX%20and%20nginx-rtmp-module" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f&amp;title=Securinets%20CTF%202k19%20Lost%20Flag%20Writeup" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f&amp;title=Streaming%20server%20using%20NGINX%20and%20nginx-rtmp-module" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fomega-coder.me%2fpost%2fsecurinets-ctf-2019-lost-flag-writeup%2f&amp;description=Securinets%20CTF%202k19%20Lost%20Flag%20Writeup" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2fomega-coder.me%2fpost%2fstreaming-server-using-nginx-and-nginx-rtmp-module%2f&amp;description=Streaming%20server%20using%20NGINX%20and%20nginx-rtmp-module" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -433,10 +575,10 @@ We use the command <code>bzr revert -r1</code> to revert back to the revision 1.
       
         <ul class="pager blog-pager">
           
-            <li class="previous">
-              <a href="https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/" data-toggle="tooltip" data-placement="top" title="Streaming server using NGINX and nginx-rtmp-module">&larr; Previous Post</a>
-            </li>
           
+            <li class="next">
+              <a href="https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/" data-toggle="tooltip" data-placement="top" title="Securinets CTF 2k19 Lost Flag Writeup">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
@@ -446,12 +588,12 @@ We use the command <code>bzr revert -r1</code> to revert back to the revision 1.
         
           
           <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup">comments</span></button>
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module">comments</span></button>
             <div id="disqus_thread"></div>
 
             <script type="text/javascript">
               var disqus_config = function () {
-              this.page.url = 'https:\/\/omega-coder.me\/post\/securinets-ctf-2019-lost-flag-writeup';
+              this.page.url = 'https:\/\/omega-coder.me\/post\/streaming-server-using-nginx-and-nginx-rtmp-module';
             };
 
           </script>

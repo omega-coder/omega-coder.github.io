@@ -25,5 +25,14 @@ After visiting the link above, we get a login page.We can login using admin/admi
 Then I started searching in the website for any other infos, but with no success. the admin of the challenge (Tr&#39;GFx) said that bruteforcing directories is enough to solve the challenge, so I used dirsearch.</description>
     </item>
     
+    <item>
+      <title>Streaming server using NGINX and nginx-rtmp-module</title>
+      <link>https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/</link>
+      <pubDate>Tue, 18 Dec 2018 01:55:45 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/post/streaming-server-using-nginx-and-nginx-rtmp-module/</guid>
+      <description>Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server.</description>
+    </item>
+    
   </channel>
 </rss>
