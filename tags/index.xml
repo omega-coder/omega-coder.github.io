@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
-    <lastBuildDate>Tue, 26 Mar 2019 17:37:37 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 01 Apr 2019 23:46:29 +0200</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Archlinux</title>
+      <link>https://omega-coder.me/tags/archlinux/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/archlinux/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Ctf</title>
@@ -18,6 +27,15 @@
       <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ftp</title>
+      <link>https://omega-coder.me/tags/ftp/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/ftp/</guid>
       <description></description>
     </item>
     
@@ -60,7 +78,7 @@
     <item>
       <title>Tutorial</title>
       <link>https://omega-coder.me/tags/tutorial/</link>
-      <pubDate>Tue, 18 Dec 2018 01:55:45 +0200</pubDate>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/tutorial/</guid>
       <description></description>
