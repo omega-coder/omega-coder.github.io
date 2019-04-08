@@ -321,7 +321,7 @@ if (!doNotTrack) {
 
 <p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1554752661/super_curling.png" alt="super_curling_webpage" /></p>
 
-<p>If we provide <code>www.google.com</code> as input, we get the content of google displayed to us.So I started playing with the input to see if I can cause some undefined behaviour.</p>
+<p>If we provide <code>www.google.com</code> as input, we get the content of google displayed to us.So I started playing with the input to see if I can get some unexpected output.</p>
 
 <p>Let&rsquo;s try to access <code>/etc/passwd</code>, we will use the <code>file</code> protocol to do so, we can get access to local files with curl using the file protocol.<br />
 <strong><code>input: file:///etc/passwd</code></strong></p>
@@ -341,7 +341,7 @@ Let&rsquo;s try accessing <code>/proc/self/environ</code>, by inputing <code>fil
 
 <p>We notice an interesting comment,</p>
 <div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php">// TODO: MySQL connection with &#34;tiix&#34; user and adding a MySQL password...</code></pre></div>
-<p>We have a mysql user <code>tiix</code> with no username!!.</p>
+<p>We have a mysql user <code>tiix</code> with no password!!.</p>
 
 <p>let&rsquo;s use <code>gopher</code> protocol and build a GREAT payload to connect to the database as <code>tiix</code> user.</p>
 
