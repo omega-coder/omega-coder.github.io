@@ -24,9 +24,18 @@
     <item>
       <title>Ctf</title>
       <link>https://omega-coder.me/tags/ctf/</link>
-      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Exploit</title>
+      <link>https://omega-coder.me/tags/exploit/</link>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/exploit/</guid>
       <description></description>
     </item>
     
@@ -36,6 +45,15 @@
       <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/ftp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gopher</title>
+      <link>https://omega-coder.me/tags/gopher/</link>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/gopher/</guid>
       <description></description>
     </item>
     
@@ -60,7 +78,7 @@
     <item>
       <title>Security</title>
       <link>https://omega-coder.me/tags/security/</link>
-      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/security/</guid>
       <description></description>
@@ -87,7 +105,7 @@
     <item>
       <title>Web</title>
       <link>https://omega-coder.me/tags/web/</link>
-      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/web/</guid>
       <description></description>
@@ -96,7 +114,7 @@
     <item>
       <title>Writeup</title>
       <link>https://omega-coder.me/tags/writeup/</link>
-      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/writeup/</guid>
       <description></description>
