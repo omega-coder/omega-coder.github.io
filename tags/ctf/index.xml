@@ -18,7 +18,7 @@
       <pubDate>Wed, 24 Apr 2019 09:27:58 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/post/angstromctf-2019-secret-sheep-society-crypto-writeup/</guid>
-      <description>TL;DR  Spotting the weakness (AES with CBC Mode). Get token Flipping specific bytes in session json (turn flase to true). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.   Challenge details    Category Points Solves     Crypto 120 0     Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for.</description>
+      <description></description>
     </item>
     
     <item>
