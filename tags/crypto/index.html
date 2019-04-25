@@ -10,9 +10,9 @@
   <title>Overview of all pages with the tag #crypto - 0m3g4K0d3r&#39;s Security Blog</title>
   <meta property="og:title" content="Overview of all pages with the tag #crypto" />
   <meta name="twitter:title" content="Overview of all pages with the tag #crypto" />
-  <meta name="description" content="Overview of all pages with the tag #crypto, such as: AngstromCTF 2019 Secret Sheep Society Crypto 120 Writeup">
-  <meta property="og:description" content="Overview of all pages with the tag #crypto, such as: AngstromCTF 2019 Secret Sheep Society Crypto 120 Writeup">
-  <meta name="twitter:description" content="Overview of all pages with the tag #crypto, such as: AngstromCTF 2019 Secret Sheep Society Crypto 120 Writeup">
+  <meta name="description" content="Overview of all pages with the tag #crypto, such as: AngstromCTF 2019 Secret Sheep Society | CTF Writeup">
+  <meta property="og:description" content="Overview of all pages with the tag #crypto, such as: AngstromCTF 2019 Secret Sheep Society | CTF Writeup">
+  <meta name="twitter:description" content="Overview of all pages with the tag #crypto, such as: AngstromCTF 2019 Secret Sheep Society | CTF Writeup">
   <meta name="author" content="omega_coder"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -217,8 +217,8 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="https://omega-coder.me/post/angstromctf-2019-secret-sheep-society-crypto-writeup/">
-                <h2 class="post-title">AngstromCTF 2019 Secret Sheep Society Crypto 120 Writeup</h2>
+              <a href="https://omega-coder.me/post/angstromctf-2019-secret-sheep-society-writeup-crypto/">
+                <h2 class="post-title">AngstromCTF 2019 Secret Sheep Society | CTF Writeup</h2>
 
                 
                   <h3 class="post-subtitle">
@@ -234,13 +234,13 @@ if (!doNotTrack) {
   <i class="fas fa-calendar"></i>&nbsp;Posted on April 24, 2019
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;0&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;0&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1097&nbsp;words
   
   
-    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine (omega-coder)
+    &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine
   
   
 </span>
@@ -249,250 +249,8 @@ if (!doNotTrack) {
               </p>
               <div class="post-entry">
                 
-                  
-
-<h1 id="tl-dr">TL;DR</h1>
-
-<ol>
-<li>Spotting the weakness (AES with CBC Mode).</li>
-<li>Get token</li>
-<li>Flipping specific bytes in session json (turn <strong><code>flase</code></strong> to <strong><code>true</code></strong>).</li>
-<li>manipulate token with flipped bytes.</li>
-<li>Send manipulated token to page.</li>
-<li>Get the flag.</li>
-</ol>
-
-<hr>
-
-<h2 id="challenge-details">Challenge details</h2>
-
-<table>
-<thead>
-<tr>
-<th><strong>Category</strong></th>
-<th><strong>Points</strong></th>
-<th><strong>Solves</strong></th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>Crypto</td>
-<td>120</td>
-<td>98</td>
-</tr>
-</tbody>
-</table>
-
-<hr>
-
-<h2 id="challenge-description">Challenge Description</h2>
-
-<blockquote>
-<p>The sheep are up to no good. They have a <a href="https://secretsheepsociety.2019.chall.actf.co/">web portal</a> for their secret society, which we have the source for. It seems fairly easy to join the organization, but climbing up its ranks is a different story.<br> Author: defund</p>
-</blockquote>
-
-<h2 id="challenge-source">Challenge Source</h2>
-
-<p>challenge app source can be found <a href="https://github.com/omega-coder/ctf-writeups/tree/master/AngstromCTF_2k19_Quals/Secret_Sheep_Society/app_source">here</a></p>
-
-<hr>
-
-<h2 id="what-the-app-is-doing">What the app is doing ?</h2>
-
-<p>we have three important routes <code>/</code>, <code>/enter</code> and <code>/exit</code>.</p>
-
-<ol>
-<li><code>/</code> will show the flag if we have admin access.</li>
-<li><code>/enter</code> accepts an input called <code>handle</code> and sets a cookie named <code>token</code> which is simply the base64 encoding of the <code>session</code> encryption using <code>AES</code> with <code>CBC</code> Mode and using Padding also.</li>
-<li><code>/exit</code> will simply <strong>unset</strong> the <strong><code>token</code></strong> cookie.</li>
-</ol>
-
-<h2 id="what-we-know-vs-what-we-don-t">what we know VS. what we don&rsquo;t.</h2>
-
-<hr>
-
-<h4 id="we-know">We know :</h4>
-
-<hr />
-
-<ol>
-<li>the format of the session which is : <code>{&quot;admin&quot;: false, &quot;handle&quot;: &quot;some_input_we_control&quot;}</code></li>
-<li>encryption is using <code>AES_CBC</code> with <code>BLOCK_SIZE = 16</code>.</li>
-<li>We have the ciphertext.
-<br>
-<hr></li>
-</ol>
-
-<h4 id="we-don-t-know">We don&rsquo;t know:</h4>
-
-<ol>
-<li>The Key.</li>
-</ol>
-
-<hr>
-
-<p><strong><code>NOTE: I haven't used the browser for this task, i still don't know what the UI looks like!!</code></strong></p>
-
-<p>let&rsquo;s see this piece of code:</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/enter&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">enter</span><span class="p">():</span>
-	<span class="n">handle</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;handle&#39;</span><span class="p">)</span>
-	<span class="n">session</span> <span class="o">=</span> <span class="p">{</span>
-		<span class="s1">&#39;admin&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
-		<span class="s1">&#39;handle&#39;</span><span class="p">:</span> <span class="n">handle</span>
-	<span class="p">}</span>
-	<span class="n">token</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-	<span class="n">response</span> <span class="o">=</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-	<span class="n">response</span><span class="o">.</span><span class="n">set_cookie</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">response</span></code></pre></div>
-<p>To get a cookie we post to <code>/enter</code> with handle data parameter set to anything we want, after that the session variable gets set and passed to <code>manager.pack(session)</code> which will return a token base64 encoded.</p>
-
-<p>Let&rsquo;s see now how does the pack method works. (.pack is defined in <code>manage.py file</code>).<br />
-<strong>pack()</strong> takes a python dictionary as an argument and return a base64 encoded token.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Manager</span><span class="p">:</span>
-
-	<span class="n">BLOCK_SIZE</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">block_size</span>
-
-	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
-
-	<span class="k">def</span> <span class="nf">pack</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">):</span>
-		<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">)</span>
-		<span class="n">iv</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">iv</span>
-		<span class="n">dec</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">session</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
-		<span class="n">enc</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">BLOCK_SIZE</span><span class="p">))</span>
-		<span class="n">raw</span> <span class="o">=</span> <span class="n">iv</span> <span class="o">+</span> <span class="n">enc</span>
-        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span></code></pre></div>
-<ol>
-<li>creates a new AES cipher with CBC mode</li>
-<li>get an IV</li>
-<li>get string representation of the json object session.</li>
-<li>pad data and encrypt it with <code>AES_CBC</code>.</li>
-<li>return <code>base64(iv + enc)</code>.</li>
-</ol>
-
-<blockquote>
-<p><strong><code>Note: iv is not encrypted, the IV is the first 16 bytes of the token found in cookie</code></strong></p>
-</blockquote>
-
-<p>Our string representation of the session json object is as follow:</p>
-
-<p>This is the default json object string repr that we will have, provided that we enter <code>xx</code> as handle paramter. (Only an example).</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;admin&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nt">&#34;handle&#34;</span><span class="p">:</span> <span class="s2">&#34;xx&#34;</span><span class="p">}</span></code></pre></div>
-<p>We obviously need to turn that <code>false</code> to <code>true&nbsp;</code>, since <code>false</code> is 5 bytes long and <code>true</code> is only 4 bytes long, we can replace <code>false</code> with <code>true&nbsp;</code> with an extra space at the end, that won&rsquo;t make a difference when parser by JSON.</p>
-
-<p>if we provide handle with value <code>xx</code> then json string representation will be on exactly two blocks.
-(<code>32 Bytes</code>).</p>
-
-<p>The AES encryption will be 64 Bytes (4 Blocks of 16 bytes each), because IV is on 16 bytes, json string on 32 Bytes and padding on One block (16 Bytes)</p>
-
-<blockquote>
-<p>16 + 32 + 16 = 64</p>
-</blockquote>
-
-<pre><code>.................. = IV (IV is known to us)
-{&quot;admin&quot;: false,   ==&gt; First Plaintext Block
- &quot;handle&quot;: &quot;xx&quot;}   ==&gt; Second Plaintext Block
-\x10\x10\x10\x10 ... \x10 ==&gt; last padding block of size 16 
-
-</code></pre>
-
-<p>Now let&rsquo;s do bit-flipping and change the  <code>false</code> to <code>true&nbsp;</code>.</p>
-
-<p>To understand the attack, we need to closely look how decryption takes place in this mode:</p>
-
-<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1556110161/601px-cbc_decryption-svg.png" alt="aes_cbc_decryption_scheme" /></p>
-
-<p>Let&rsquo;s suppose our <code>{&quot;admin&quot;: false,</code> is our first block, this plaintext block is resulting from <code>XORing</code> the IV (Initialization Vector) with the first ciphertext block, as you can see from the figure above.We can manipulate the cookie returned by the server to forge a cookie that we decoded get json encoded to <code>{&quot;admin&quot;: true , &quot;handle&quot;: &quot;xx&quot;}</code>. A rule says that whenever you change one byte (&lsquo;flips&rsquo;) at an offset
-in a given ciphertext block, the same offset is changed in the next plaintext block (see figure below)</p>
-
-<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1556114028/082113_1459_cbcbyteflip3.jpg" alt="cbc_flip_byte" /></p>
-
-<h2 id="fully-automated-exploit-with-python">Fully Automated Exploit with Python</h2>
-
-<p>let&rsquo;s first try to get a token by posting handle data to <code>/enter</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="n">URL</span> <span class="o">=</span> <span class="s2">&#34;https://secretsheepsociety.2019.chall.actf.co/&#34;</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-
-<span class="c1"># generate token from /enter route </span>
-<span class="n">token</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">enter_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;handle&#34;</span><span class="p">:</span> <span class="s2">&#34;xx&#34;</span><span class="p">}</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] Sending &#39;xx&#39; as handle payload!&#34;</span><span class="p">)</span>
-<span class="n">token_exp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;token=(.*);&#39;</span><span class="p">)</span>
-<span class="n">req</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span><span class="o">+</span><span class="s2">&#34;enter&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">enter_data</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;[?] Made request to /enter&#34;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">302</span><span class="p">:</span> <span class="c1"># means we are being redirected to / </span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[?] Got 302 Redirect request&#34;</span><span class="p">)</span>
-    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">token_exp</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&#34;Set-Cookie&#34;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-        <span class="n">token</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] Got token : &#34;</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span></code></pre></div>
-<p>Now let&rsquo;s see the full script that will get a token from <code>/enter</code> and manipulate it and send it back to man route (index.html) to get the final flag.</p>
-<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span><span class="p">,</span> <span class="n">b64decode</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="n">URL</span> <span class="o">=</span> <span class="s2">&#34;https://secretsheepsociety.2019.chall.actf.co/&#34;</span>
-
-<span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-
-<span class="c1"># generate token from /enter route </span>
-<span class="n">token</span> <span class="o">=</span> <span class="bp">None</span>
-<span class="n">enter_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;handle&#34;</span><span class="p">:</span> <span class="s2">&#34;xx&#34;</span><span class="p">}</span>
-<span class="c1"># xx is just to make it 2 blocks in size</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] Sending &#39;xx&#39; as handle payload!&#34;</span><span class="p">)</span>
-<span class="n">token_exp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;token=(.*);&#39;</span><span class="p">)</span>
-<span class="n">req</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">URL</span><span class="o">+</span><span class="s2">&#34;enter&#34;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">enter_data</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="c1"># allow redirects is set to False because if set to True we won&#39;t be able to retrive</span>
-<span class="c1"># the cookie set by /enter</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;[?] Made request to /enter&#34;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">302</span><span class="p">:</span> <span class="c1"># we are being redirected to /</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[?] Got 302 Redirect request&#34;</span><span class="p">)</span>
-    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">token_exp</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&#34;Set-Cookie&#34;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
-        <span class="n">token</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] Got token : &#34;</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
-
-<span class="c1"># &#39;f&#39; is located at offset 10 in the second block.</span>
-<span class="c1"># &#39;a&#39; is located at offset 11 in the second block.</span>
-<span class="c1"># &#39;l&#39; ....</span>
-<span class="c1"># &#39;s&#39; ....</span>
-<span class="c1"># &#39;e&#39; ....</span>
-<span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="n">ct</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-    <span class="n">manipulated_token</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
-    <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;f&#39;</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
-    <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
-    <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
-    <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="o">=</span> <span class="n">manipulated_token</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39;e&#39;</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] Flipped Bytes 10, 11, 12, 13 and 14&#34;</span><span class="p">)</span>
-
-    <span class="n">final_token</span> <span class="o">=</span> <span class="n">b64encode</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">manipulated_token</span><span class="p">))</span>
-
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] generated new token &#34;</span><span class="p">,</span> <span class="n">final_token</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-
-<span class="k">if</span> <span class="n">final_token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-    <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;token&#34;</span><span class="p">:</span> <span class="n">final_token</span><span class="o">.</span><span class="n">decode</span><span class="p">()}</span>
-    
-    <span class="c1"># if token is correct then session will contain {&#34;admin&#34;: True, &#34;handle&#34;: &#34;xx&#34;} </span>
-    <span class="c1"># we will be able to get the flag</span>
-
-    <span class="n">flag_exp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;actf{.*}&#39;</span><span class="p">)</span>
-    <span class="n">req</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">flag_exp</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">&#34;[+] FLAG: &#34;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></code></pre></div>
-<p><code>FLAG = actf{shep_the_conqueror_slumbers}</code></p>
-
-<p>Thanks for Reading.</p>
-
+                  Challenge details    Category Points Solves     Crypto 120 98    TL;DR  Spotting the weakness (AES with CBC Mode). Get token. Flipping specific bytes in session json (turn false to true ). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.  Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for.
+                  <a href="https://omega-coder.me/post/angstromctf-2019-secret-sheep-society-writeup-crypto/" class="post-read-more">[Read More]</a>
                 
               </div>
 

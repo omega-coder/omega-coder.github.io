@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
-    <lastBuildDate>Wed, 24 Apr 2019 09:27:58 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>aes</title>
       <link>https://omega-coder.me/tags/aes/</link>
-      <pubDate>Wed, 24 Apr 2019 09:27:58 +0200</pubDate>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/aes/</guid>
       <description></description>
@@ -24,7 +24,7 @@
     <item>
       <title>bit-flipping</title>
       <link>https://omega-coder.me/tags/bit-flipping/</link>
-      <pubDate>Wed, 24 Apr 2019 09:27:58 +0200</pubDate>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/bit-flipping/</guid>
       <description></description>
@@ -33,7 +33,7 @@
     <item>
       <title>crypto</title>
       <link>https://omega-coder.me/tags/crypto/</link>
-      <pubDate>Wed, 24 Apr 2019 09:27:58 +0200</pubDate>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/crypto/</guid>
       <description></description>
@@ -42,7 +42,7 @@
     <item>
       <title>ctf</title>
       <link>https://omega-coder.me/tags/ctf/</link>
-      <pubDate>Wed, 24 Apr 2019 09:27:58 +0200</pubDate>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/ctf/</guid>
       <description></description>
@@ -51,7 +51,7 @@
     <item>
       <title>security</title>
       <link>https://omega-coder.me/tags/security/</link>
-      <pubDate>Wed, 24 Apr 2019 09:27:58 +0200</pubDate>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/security/</guid>
       <description></description>
