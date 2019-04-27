@@ -18,7 +18,13 @@
       <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/post/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/</guid>
-      <description></description>
+      <description>This blog post contains the writeup for two challenges (No SEQUELS &amp;amp; No SEQUELS 2), because they are related.
+So let&amp;rsquo;s start with No SEQUELS first.
+Category: Web
+Points: 50
+Challenge Description  The prequels sucked, and the sequels aren&amp;rsquo;t much better, but at least we always have the original trilogy.
+Hint said : MongoDB is a safer alternative to SQL, right?
+ What we can get from the informations stated above ?</description>
     </item>
     
   </channel>

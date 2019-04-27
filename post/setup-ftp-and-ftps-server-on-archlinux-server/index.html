@@ -393,10 +393,13 @@ if (!doNotTrack) {
 </blockquote>
 
 <p>Edit the lines below as the following: (uncomment them by removing the preceding #)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">anonymous_enable<span style="color:#f92672">=</span>NO
-local_enable<span style="color:#f92672">=</span>YES
-write_enable<span style="color:#f92672">=</span>YES
-local_umask<span style="color:#f92672">=</span><span style="color:#ae81ff">022</span></code></pre></div>
+
+<pre><code class="language-bash">anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=022
+</code></pre>
+
 <p><strong>anonymous_enable=NO</strong>: Don’t allow anyone to access our FTP server (without valid credentials)<br />
 <strong>local_enable=YES</strong>: allow local users to use FTP. (a local user is one whose username, password reside on your archlinux host. )<br />
 <strong>write_enable=YES</strong>: give users ability to write (upload, update) on files</p>
@@ -460,7 +463,10 @@ go back to your terminal and  <strong><code>restart vsftpd</code></strong>.</p>
 <p>vsftpd recommends that you define on your system a unique user which the ftp server can use as a totally isolated and unprivileged user.</p>
 
 <p>so, let’s create a user just for FTPing, this user can’t do anything such as login via SSH. So, if the user gets compromised, our machine is not left wide open (can’t login using that username).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo useradd -g ftp -d /srv/http -s /sbin/nologin userftp</code></pre></div>
+
+<pre><code class="language-bash">sudo useradd -g ftp -d /srv/http -s /sbin/nologin userftp
+</code></pre>
+
 <table>
 <thead>
 <tr>

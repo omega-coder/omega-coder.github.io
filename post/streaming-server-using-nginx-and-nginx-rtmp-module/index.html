@@ -473,10 +473,16 @@ sudo make install
 <p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1545171502/rtmp_vod.png" alt="rtmp-vod" /></p>
 
 <p>Now restart your server!.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo /usr/local/nginx/sbin/nginx -s stop
-sudo /usr/local/nginx/sbin/nginx</code></pre></div>
+
+<pre><code class="language-sh">sudo /usr/local/nginx/sbin/nginx -s stop
+sudo /usr/local/nginx/sbin/nginx
+</code></pre>
+
 <p>If your server is already running, you can just reload it, since we only made configurations changes.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo /usr/local/nginx/sbin/nginx -s reload</code></pre></div>
+
+<pre><code class="language-sh">sudo /usr/local/nginx/sbin/nginx -s reload
+</code></pre>
+
 <h2 id="step-4-testing">Step 4 &mdash; Testing</h2>
 
 <p>We can test our streaming server using VLC media player since it supports RTMP. We will only test the <code>Vod</code> (Video On Demand), we will leave <code>HLS</code> for the next time since it invloves <code>pushing</code> the stream from a remote location and then <code>pulling</code> it again from another location <code>(we can push the stream using the great ffmpeg!)</code></p>
