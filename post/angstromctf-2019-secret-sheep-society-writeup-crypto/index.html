@@ -150,6 +150,12 @@ if (!doNotTrack) {
         
           
             <li>
+              <a title="Categories" href="/categories">Categories</a>
+            </li>
+          
+        
+          
+            <li>
               <a title="About" href="/page/about/">About</a>
             </li>
           
@@ -356,41 +362,35 @@ if (!doNotTrack) {
 <p><strong><code>NOTE: I haven't used the browser for this task, i still don't know what the UI looks like!!</code></strong></p>
 
 <p>let&rsquo;s see this piece of code:</p>
-
-<pre><code>@app.route('/enter', methods=['POST'])
-def enter():
-	handle = request.form.get('handle')
-	session = {
-		'admin': False,
-		'handle': handle
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/enter&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;POST&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">enter</span>():
+	handle <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;handle&#39;</span>)
+	session <span style="color:#f92672">=</span> {
+		<span style="color:#e6db74">&#39;admin&#39;</span>: False,
+		<span style="color:#e6db74">&#39;handle&#39;</span>: handle
 	}
-	token = manager.pack(session)
-	response = redirect('/')
-	response.set_cookie('token', token)
-    return response
-</code></pre>
-
+	token <span style="color:#f92672">=</span> manager<span style="color:#f92672">.</span>pack(session)
+	response <span style="color:#f92672">=</span> redirect(<span style="color:#e6db74">&#39;/&#39;</span>)
+	response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;token&#39;</span>, token)
+    <span style="color:#66d9ef">return</span> response</code></pre></div>
 <p>To get a cookie we post to <code>/enter</code> with handle data parameter set to anything we want, after that the session variable gets set and passed to <code>manager.pack(session)</code> which will return a token base64 encoded.</p>
 
 <p>Let&rsquo;s see now how does the pack method works. (.pack is defined in <code>manage.py file</code>).<br />
 <strong>pack()</strong> takes a python dictionary as an argument and return a base64 encoded token.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Manager</span>:
 
-<pre><code>class Manager:
+	BLOCK_SIZE <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>block_size
 
-	BLOCK_SIZE = AES.block_size
+	<span style="color:#66d9ef">def</span> __init__(self, key):
+		self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> key
 
-	def __init__(self, key):
-		self.key = key
-
-	def pack(self, session):
-		cipher = AES.new(self.key, AES.MODE_CBC)
-		iv = cipher.iv
-		dec = json.dumps(session).encode()
-		enc = cipher.encrypt(pad(dec, self.BLOCK_SIZE))
-		raw = iv + enc
-        return base64.b64encode(raw)
-</code></pre>
-
+	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pack</span>(self, session):
+		cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(self<span style="color:#f92672">.</span>key, AES<span style="color:#f92672">.</span>MODE_CBC)
+		iv <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>iv
+		dec <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(session)<span style="color:#f92672">.</span>encode()
+		enc <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(pad(dec, self<span style="color:#f92672">.</span>BLOCK_SIZE))
+		raw <span style="color:#f92672">=</span> iv <span style="color:#f92672">+</span> enc
+        <span style="color:#66d9ef">return</span> base64<span style="color:#f92672">.</span>b64encode(raw)</code></pre></div>
 <ol>
 <li>creates a new AES cipher with CBC mode</li>
 <li>get an IV</li>
@@ -406,10 +406,7 @@ def enter():
 <p>Our string representation of the session json object is as follow:</p>
 
 <p>This is the default json object string repr that we will have, provided that we enter <code>xx</code> as handle paramter. (Only an example).</p>
-
-<pre><code>{&quot;admin&quot;: false, &quot;handle&quot;: &quot;xx&quot;}
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">&#34;admin&#34;</span>: <span style="color:#66d9ef">false</span>, <span style="color:#f92672">&#34;handle&#34;</span>: <span style="color:#e6db74">&#34;xx&#34;</span>}</code></pre></div>
 <p>We obviously need to turn that <code>false</code> to <code>true&nbsp;</code>, since <code>false</code> is 5 bytes long and <code>true</code> is only 4 bytes long, we can replace <code>false</code> with <code>true&nbsp;</code> with an extra space at the end, that won&rsquo;t make a difference when parser by JSON.</p>
 
 <p>if we provide handle with value <code>xx</code> then json string representation will be on exactly two blocks.
@@ -463,66 +460,63 @@ if req.status_code == 302: # means we are being redirected to /
 </code></pre>
 
 <p>Now let&rsquo;s see the full script that will get a token from <code>/enter</code> and manipulate it and send it back to man route (index.html) to get the final flag.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">from</span> base64 <span style="color:#f92672">import</span> b64encode, b64decode
+<span style="color:#f92672">import</span> re
+URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://secretsheepsociety.2019.chall.actf.co/&#34;</span>
 
-<pre><code>import requests
-from base64 import b64encode, b64decode
-import re
-URL = &quot;https://secretsheepsociety.2019.chall.actf.co/&quot;
+session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
 
-session = requests.Session()
+<span style="color:#75715e"># generate token from /enter route </span>
+token <span style="color:#f92672">=</span> None
+enter_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;handle&#34;</span>: <span style="color:#e6db74">&#34;xx&#34;</span>}
+<span style="color:#75715e"># xx is just to make it 2 blocks in size</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Sending &#39;xx&#39; as handle payload!&#34;</span>)
+token_exp <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;token=(.*);&#39;</span>)
+req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(URL<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;enter&#34;</span>, data<span style="color:#f92672">=</span>enter_data, verify<span style="color:#f92672">=</span>False, allow_redirects<span style="color:#f92672">=</span>False)
+<span style="color:#75715e"># allow redirects is set to False because if set to True we won&#39;t be able to retrive</span>
+<span style="color:#75715e"># the cookie set by /enter</span>
 
-# generate token from /enter route 
-token = None
-enter_data = {&quot;handle&quot;: &quot;xx&quot;}
-# xx is just to make it 2 blocks in size
-print(&quot;[+] Sending 'xx' as handle payload!&quot;)
-token_exp = re.compile(r'token=(.*);')
-req = session.post(URL+&quot;enter&quot;, data=enter_data, verify=False, allow_redirects=False)
-# allow redirects is set to False because if set to True we won't be able to retrive
-# the cookie set by /enter
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Made request to /enter&#34;</span>)
+<span style="color:#66d9ef">if</span> req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">302</span>: <span style="color:#75715e"># we are being redirected to /</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Got 302 Redirect request&#34;</span>)
+    match <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(token_exp, req<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#34;Set-Cookie&#34;</span>])
+    <span style="color:#66d9ef">if</span> match:
+        token <span style="color:#f92672">=</span> match<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Got token : &#34;</span>, token)
 
-print(&quot;[?] Made request to /enter&quot;)
-if req.status_code == 302: # we are being redirected to /
-    print(&quot;[?] Got 302 Redirect request&quot;)
-    match = re.search(token_exp, req.headers[&quot;Set-Cookie&quot;])
-    if match:
-        token = match.group(1)
-        print(&quot;[+] Got token : &quot;, token)
+<span style="color:#75715e"># &#39;f&#39; is located at offset 10 in the second block.</span>
+<span style="color:#75715e"># &#39;a&#39; is located at offset 11 in the second block.</span>
+<span style="color:#75715e"># &#39;l&#39; ....</span>
+<span style="color:#75715e"># &#39;s&#39; ....</span>
+<span style="color:#75715e"># &#39;e&#39; ....</span>
+<span style="color:#66d9ef">if</span> token <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+    ct <span style="color:#f92672">=</span> b64decode(token)
+    manipulated_token <span style="color:#f92672">=</span> list(ct)
+    manipulated_token[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;f&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;t&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">11</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">11</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;r&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;l&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;u&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">13</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">13</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;s&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;e&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">14</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">14</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;e&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39; &#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Flipped Bytes 10, 11, 12, 13 and 14&#34;</span>)
 
-# 'f' is located at offset 10 in the second block.
-# 'a' is located at offset 11 in the second block.
-# 'l' ....
-# 's' ....
-# 'e' ....
-if token is not None:
-    ct = b64decode(token)
-    manipulated_token = list(ct)
-    manipulated_token[10] = manipulated_token[10] ^ ord('f') ^ ord('t')
-    manipulated_token[11] = manipulated_token[11] ^ ord('a') ^ ord('r')
-    manipulated_token[12] = manipulated_token[12] ^ ord('l') ^ ord('u')
-    manipulated_token[13] = manipulated_token[13] ^ ord('s') ^ ord('e')
-    manipulated_token[14] = manipulated_token[14] ^ ord('e') ^ ord(' ')
-    print(&quot;[+] Flipped Bytes 10, 11, 12, 13 and 14&quot;)
+    final_token <span style="color:#f92672">=</span> b64encode(bytes(manipulated_token))
 
-    final_token = b64encode(bytes(manipulated_token))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] generated new token &#34;</span>, final_token<span style="color:#f92672">.</span>decode())
 
-    print(&quot;[+] generated new token &quot;, final_token.decode())
-
-if final_token is not None:
-    session = requests.Session()
-    cookies = {&quot;token&quot;: final_token.decode()}
+<span style="color:#66d9ef">if</span> final_token <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+    session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
+    cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;token&#34;</span>: final_token<span style="color:#f92672">.</span>decode()}
     
-    # if token is correct then session will contain {&quot;admin&quot;: True, &quot;handle&quot;: &quot;xx&quot;} 
-    # we will be able to get the flag
+    <span style="color:#75715e"># if token is correct then session will contain {&#34;admin&#34;: True, &#34;handle&#34;: &#34;xx&#34;} </span>
+    <span style="color:#75715e"># we will be able to get the flag</span>
 
-    flag_exp = re.compile(r'actf{.*}')
-    req = session.get(URL, cookies=cookies)
-    if req.status_code == 200:
-        m = re.search(flag_exp, req.text)
-        if m:
-            print(&quot;[+] FLAG: &quot;, m.group(0))
-</code></pre>
-
+    flag_exp <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;actf{.*}&#39;</span>)
+    req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(URL, cookies<span style="color:#f92672">=</span>cookies)
+    <span style="color:#66d9ef">if</span> req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+        m <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(flag_exp, req<span style="color:#f92672">.</span>text)
+        <span style="color:#66d9ef">if</span> m:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] FLAG: &#34;</span>, m<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">0</span>))</code></pre></div>
 <p>Note: This worked because the block we wanted to manipulate was the second block, which we can of course manipulate using the IV block only, if it was another different block then the solution would be a little harder than this.</p>
 
 <p><code>FLAG = actf{shep_the_conqueror_slumbers}</code></p>
@@ -630,6 +624,10 @@ if final_token is not None:
             </li>
           
           
+            <li class="next">
+              <a href="https://omega-coder.me/post/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/" data-toggle="tooltip" data-placement="top" title="Angstromctf 2019 | No Sequels and No Sequels2 Web Writeup">Next Post &rarr;</a>
+            </li>
+          
         </ul>
       
 
@@ -637,16 +635,27 @@ if final_token is not None:
       
         
           
-          <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://omega-coder.me/post/angstromctf-2019-secret-sheep-society-writeup-crypto">comments</span></button>
+          <div class="disqus-comments">
             <div id="disqus_thread"></div>
-
-            <script type="text/javascript">
-              var disqus_config = function () {
-              this.page.url = 'https:\/\/omega-coder.me\/post\/angstromctf-2019-secret-sheep-society-writeup-crypto';
-            };
-
-          </script>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "omega-coder" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
           
         
@@ -772,28 +781,6 @@ if final_token is not None:
 
 
 
-
-
-
-<script type="text/javascript">
-$(function(){
-  $('#show-comments').on('click', function(){
-    var disqus_shortname = 'omega-coder';
-      
-    (function() {
-      var disqus = document.createElement('script'); 
-      disqus.type = 'text/javascript'; 
-      disqus.async = true;
-      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
-    })();
-      
-    $(this).hide(); 
-    });
-  });
-      
-</script>
-<script id="dsq-count-scr" src="//omega-coder.disqus.com/count.js" async></script>
 
 
 

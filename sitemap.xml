@@ -4,31 +4,84 @@
   
   <url>
     <loc>https://omega-coder.me/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/post/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/categories/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/post/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/ctf/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/mongodb/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/nosql/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/nosql-injection/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/categories/security/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/web/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/tags/writeup/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://omega-coder.me/categories/writeups/</loc>
+    <lastmod>2019-04-26T01:49:01+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://omega-coder.me/post/angstromctf-2019-secret-sheep-society-writeup-crypto/</loc>
     <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/categories/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/post/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/tags/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -50,25 +103,7 @@
   </url>
   
   <url>
-    <loc>https://omega-coder.me/tags/ctf/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/categories/security/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://omega-coder.me/tags/security/</loc>
-    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/categories/writeups/</loc>
     <lastmod>2019-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -86,18 +121,6 @@
   
   <url>
     <loc>https://omega-coder.me/tags/gopher/</loc>
-    <lastmod>2019-04-08T10:59:30+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/tags/web/</loc>
-    <lastmod>2019-04-08T10:59:30+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://omega-coder.me/tags/writeup/</loc>
     <lastmod>2019-04-08T10:59:30+02:00</lastmod>
     <priority>0</priority>
   </url>

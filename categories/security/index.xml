@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
-    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2019 01:49:01 +0200</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/categories/security/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Angstromctf 2019 | No Sequels and No Sequels2 Web Writeup</title>
+      <link>https://omega-coder.me/post/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/post/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>AngstromCTF 2019 Secret Sheep Society | CTF Writeup</title>

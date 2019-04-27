@@ -7,10 +7,64 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
-    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Apr 2019 01:49:01 +0200</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ctf</title>
+      <link>https://omega-coder.me/tags/ctf/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongodb</title>
+      <link>https://omega-coder.me/tags/mongodb/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nosql</title>
+      <link>https://omega-coder.me/tags/nosql/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/nosql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nosql-injection</title>
+      <link>https://omega-coder.me/tags/nosql-injection/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/nosql-injection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://omega-coder.me/tags/web/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeup</title>
+      <link>https://omega-coder.me/tags/writeup/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/writeup/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>aes</title>
@@ -40,15 +94,6 @@
     </item>
     
     <item>
-      <title>ctf</title>
-      <link>https://omega-coder.me/tags/ctf/</link>
-      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
-      <author>admin@omega-coder.me (omega_coder)</author>
-      <guid>https://omega-coder.me/tags/ctf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>security</title>
       <link>https://omega-coder.me/tags/security/</link>
       <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
@@ -72,24 +117,6 @@
       <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/gopher/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>web</title>
-      <link>https://omega-coder.me/tags/web/</link>
-      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
-      <author>admin@omega-coder.me (omega_coder)</author>
-      <guid>https://omega-coder.me/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeup</title>
-      <link>https://omega-coder.me/tags/writeup/</link>
-      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
-      <author>admin@omega-coder.me (omega_coder)</author>
-      <guid>https://omega-coder.me/tags/writeup/</guid>
       <description></description>
     </item>
     

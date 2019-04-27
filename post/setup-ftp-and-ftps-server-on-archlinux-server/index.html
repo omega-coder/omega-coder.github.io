@@ -150,6 +150,12 @@ if (!doNotTrack) {
         
           
             <li>
+              <a title="Categories" href="/categories">Categories</a>
+            </li>
+          
+        
+          
+            <li>
               <a title="About" href="/page/about/">About</a>
             </li>
           
@@ -387,10 +393,10 @@ if (!doNotTrack) {
 </blockquote>
 
 <p>Edit the lines below as the following: (uncomment them by removing the preceding #)</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">anonymous_enable</span><span class="o">=</span>NO
-<span class="nv">local_enable</span><span class="o">=</span>YES
-<span class="nv">write_enable</span><span class="o">=</span>YES
-<span class="nv">local_umask</span><span class="o">=</span><span class="m">022</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">anonymous_enable<span style="color:#f92672">=</span>NO
+local_enable<span style="color:#f92672">=</span>YES
+write_enable<span style="color:#f92672">=</span>YES
+local_umask<span style="color:#f92672">=</span><span style="color:#ae81ff">022</span></code></pre></div>
 <p><strong>anonymous_enable=NO</strong>: Don’t allow anyone to access our FTP server (without valid credentials)<br />
 <strong>local_enable=YES</strong>: allow local users to use FTP. (a local user is one whose username, password reside on your archlinux host. )<br />
 <strong>write_enable=YES</strong>: give users ability to write (upload, update) on files</p>
@@ -454,7 +460,7 @@ go back to your terminal and  <strong><code>restart vsftpd</code></strong>.</p>
 <p>vsftpd recommends that you define on your system a unique user which the ftp server can use as a totally isolated and unprivileged user.</p>
 
 <p>so, let’s create a user just for FTPing, this user can’t do anything such as login via SSH. So, if the user gets compromised, our machine is not left wide open (can’t login using that username).</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo useradd -g ftp -d /srv/http -s /sbin/nologin userftp</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo useradd -g ftp -d /srv/http -s /sbin/nologin userftp</code></pre></div>
 <table>
 <thead>
 <tr>
@@ -708,16 +714,27 @@ Now open the vsftpd configuration file again.</p>
       
         
           
-          <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://omega-coder.me/post/setup-ftp-and-ftps-server-on-archlinux-server">comments</span></button>
+          <div class="disqus-comments">
             <div id="disqus_thread"></div>
-
-            <script type="text/javascript">
-              var disqus_config = function () {
-              this.page.url = 'https:\/\/omega-coder.me\/post\/setup-ftp-and-ftps-server-on-archlinux-server';
-            };
-
-          </script>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "omega-coder" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
           
         
@@ -843,28 +860,6 @@ Now open the vsftpd configuration file again.</p>
 
 
 
-
-
-
-<script type="text/javascript">
-$(function(){
-  $('#show-comments').on('click', function(){
-    var disqus_shortname = 'omega-coder';
-      
-    (function() {
-      var disqus = document.createElement('script'); 
-      disqus.type = 'text/javascript'; 
-      disqus.async = true;
-      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
-    })();
-      
-    $(this).hide(); 
-    });
-  });
-      
-</script>
-<script id="dsq-count-scr" src="//omega-coder.disqus.com/count.js" async></script>
 
 
 
