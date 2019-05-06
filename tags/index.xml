@@ -7,10 +7,55 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
-    <lastBuildDate>Fri, 26 Apr 2019 01:49:01 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>INShAck</title>
+      <link>https://omega-coder.me/tags/inshack/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/inshack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>forensics</title>
+      <link>https://omega-coder.me/tags/forensics/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/forensics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ntfs</title>
+      <link>https://omega-coder.me/tags/ntfs/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/ntfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>port-knocking</title>
+      <link>https://omega-coder.me/tags/port-knocking/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/port-knocking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>writeup</title>
+      <link>https://omega-coder.me/tags/writeup/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/tags/writeup/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>ctf</title>
@@ -54,15 +99,6 @@
       <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>writeup</title>
-      <link>https://omega-coder.me/tags/writeup/</link>
-      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
-      <author>admin@omega-coder.me (omega_coder)</author>
-      <guid>https://omega-coder.me/tags/writeup/</guid>
       <description></description>
     </item>
     

@@ -7,15 +7,33 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
-    <lastBuildDate>Fri, 26 Apr 2019 01:49:01 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
     
 	<atom:link href="https://omega-coder.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>INShAck</title>
+      <link>https://omega-coder.me/categories/inshack/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/categories/inshack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>forensics</title>
+      <link>https://omega-coder.me/categories/forensics/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <author>admin@omega-coder.me (omega_coder)</author>
+      <guid>https://omega-coder.me/categories/forensics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>security</title>
       <link>https://omega-coder.me/categories/security/</link>
-      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/categories/security/</guid>
       <description></description>
@@ -24,7 +42,7 @@
     <item>
       <title>writeups</title>
       <link>https://omega-coder.me/categories/writeups/</link>
-      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
       <guid>https://omega-coder.me/categories/writeups/</guid>
       <description></description>
