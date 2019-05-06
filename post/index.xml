@@ -92,14 +92,5 @@ Then I started searching in the website for any other infos, but with no success
       <description>Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server.</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://omega-coder.me/post/inshack-you-shall-not-pass-forensics-330-writeup/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>admin@omega-coder.me (omega_coder)</author>
-      <guid>https://omega-coder.me/post/inshack-you-shall-not-pass-forensics-330-writeup/</guid>
-      <description>Challenge details.  .task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }   body { font-family: -apple-system, BlinkMacSystemFont, &#39;Segoe WPC&#39;, &#39;Segoe UI&#39;, &#39;HelveticaNeue-Light&#39;, &#39;Ubuntu&#39;, &#39;Droid Sans&#39;, sans-serif; font-size: 14px; line-height: 1.6; }      title: &amp;quot;INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup&amp;quot; author: &amp;quot;CHERIEF Yassine Aka. omega_coder&amp;quot; date: 2019-05-05T18:03:05+02:00 subtitle: &amp;quot;Data Extraction and Port knocking&amp;quot; image: &amp;quot;https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557078174/Screenshot_2019-05-05_18-43-57.png&amp;quot; bigimg: [{&amp;quot;src&amp;quot;: &amp;quot;https://res.</description>
-    </item>
-    
   </channel>
 </rss>
