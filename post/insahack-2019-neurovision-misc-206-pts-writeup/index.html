@@ -63,7 +63,7 @@
   "headline": "INS\x27HACK :: 2019 :: Neurovision Misc 206 pts Writeup",
   "description" : "Challenge details.    Category Points Solves Difficulty     Misc 206 20 Hard    1. Challenge description  We found this strange file from an AI Startup. Maybe it contains sensitive information\x26hellip;\nNeurovision files\n 2. SOLUTION #1 We re given an HDF5 filename named neurovision-2d327377b559adb7fc04e0c3ee5c950c, executing file command will tell us its an HDF5 file\nfile neurovision-2d327377b559adb7fc04e0c3ee5c950c # outputs neurovision-2d327377b559adb7fc04e0c3ee5c950c: Hierarchical Data Format (version 5) data   For More on HDF5 structure HERE",
   "inLanguage" : "en",
-  "wordCount":  520 ,
+  "wordCount":  1335 ,
   "datePublished" : "2019-05-06T14:19:30",
   "dateModified" : "2019-05-06T14:19:30",
   "image" : "https:\/\/omega-coder.me\/img\/profile_pic.jpg",
@@ -300,10 +300,10 @@ if (!doNotTrack) {
   <i class="fas fa-calendar"></i>&nbsp;Posted on May 6, 2019
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;520&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1335&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine (omega_coder)
@@ -341,10 +341,10 @@ if (!doNotTrack) {
   <i class="fas fa-calendar"></i>&nbsp;Posted on May 6, 2019
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;7&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;520&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1335&nbsp;words
   
   
     &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;CHERIEF Yassine (omega_coder)
@@ -537,9 +537,145 @@ flag.save('flag.png')
 
 <p><code>INSA{0v3erfitt3d_th3_Fl4g!}</code></p>
 
-<h2 id="solution-2-will-be-posted-later">SOLUTION #2 WILL BE POSTED LATER</h2>
+<h2 id="solution-2">SOLUTION #2</h2>
 
-<p>THIS WILL BE MUCH MORE INTERESTING!</p>
+<p><code>This solution generates a random image in a certain way so that the output layer (Which is a scalar output) of our neural network converges to the output we want</code></p>
+
+<p>We already stated in Solution #1 that the output is a value in this interval <code>[0, 1]</code> (<em>Could be interpreted as a probability</em>)</p>
+
+<p>So, We have a keras model (.hdf5 file) for a neural network with a single scalar output, for which the activation function is <code>sigmoid</code>, so the output is just the result of the <code>sigmoid</code> function applied to the <code>weighted sum</code> of the input layer which appears to be an image with the size of <code>68x218</code>, at least it is a 2D array of size 68 by 218.</p>
+
+<h3 id="u-about-the-sigmoid-function-u"><u>About the sigmoid function</u></h3>
+
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557190466/3-s2.0-B9780080499451500083-f03-02-9780080499451.jpg" alt="sigmoid_function_plot" /></p>
+
+<p>A <strong>sigmoid</strong> function is a mathematical function having a characteristic <strong>&ldquo;S&rdquo;-shaped</strong> curve or sigmoid curve. Often, sigmoid function refers to the special case of the <strong>logistic function</strong> shown in the above figure and defined by the formula,</p>
+
+<p>$$ S(x) = \frac{1}{1 + e^{-x}} = \frac{e^x}{1 + e^x} $$</p>
+
+<h4 id="u-when-to-use-sigmoid-activation-function-u"><u>When to use Sigmoid Activation Function ?</u></h4>
+
+<p>One of the <strong>main reasons</strong> to use the <code>sigmoid function</code> is because it exists in between <code>0</code> and <code>1</code>. Thus, it is especially used for models where we have to predict the <code>probability</code> as an output.Since the probability of anything exists between <code>0</code> and <code>1</code>, then Sigmoid is the best choice.</p>
+
+<p><code>NOTE: the use of a logistic sigmoid function can cause a neural network to get stuck at the training</code></p>
+
+<p>As we said above, we will be generating random image and changing it so that the output of our neural network converges to <code>1</code> which is our desired value (<code>Probability of 1 that the flag image is correct</code>).</p>
+
+<h3 id="u-how-do-we-know-how-to-change-the-image-u"><u>How do we know how to change the image ?</u></h3>
+
+<p>We will be calculating the <code>Gradient</code> of our first layer, this way we know how to evolve the image so we can get an output that <code>converges to 1</code> which is our desired value.</p>
+
+<p>Image is changed using the equation below,</p>
+
+<p>$$ ImageMatrix = ImageMatrix - (Gradient * learning rate) $$</p>
+
+<p>$$ ImageMatrix \quad -=\quad(Gradient * learning rate) $$</p>
+
+<h3 id="u-let-s-code-the-solution-u"><u>Let&rsquo;s code the solution</u></h3>
+
+<p>Let&rsquo;s start by loading our model and defining our input and output layers.</p>
+
+<pre><code class="language-python">import keras
+from keras.models import load_model
+
+model = load_model('neurovision-2d327377b559adb7fc04e0c3ee5c950c')
+in_layer = model.layers[0].input    #input layer shape=(?, 68, 218)
+out_layer = model.layers[1].output  #output layer shape=(?, 1)
+</code></pre>
+
+<p>Now, we need to define the gradient and cost functions using keras predefined function</p>
+
+<pre><code class="language-python">
+from keras.losses import mean_squared_error
+from keras import backend
+&quot;&quot;&quot;
+COST FUNCTION
+cost function is defined as the mean squared error of the output
+layer and the value 1 which our desired value
+&quot;&quot;&quot;
+cost = mean_squared_error(out_layer, 1)
+
+&quot;&quot;&quot;
+GRADIENT FUNCTION
+Gradient function is defined with parameters cost function and 
+our model input layer
+We will use keras backend to define the gradients.
+&quot;&quot;&quot;
+grad = backend.gradients(cost, in_layer)[0]
+
+&quot;&quot;&quot;
+WE WILL DEFINE A FUNCTION TO RETURN COST AND GRADIENT
+WHEN INPUT IS FED
+&quot;&quot;&quot;
+get_cost_and_grad = backend.function([in_layer], [cost, grad])
+</code></pre>
+
+<p>Now, the cost and gradient having been defined, let&rsquo;s create a random image using numpy and iterate to modify the first image and until achieving a <code>target cost</code> that we will be defining below.</p>
+
+<pre><code class="language-python"># generate a random image using numpy
+image = np.random.rand(1, 68, 218)
+desired_cost = 0.1  # define the target cost
+lr = 1000           # set learning rate to 1000, ti will get good results
+im_count = 0        # this is used to keep count of intermediate images
+
+while True:
+  # get cost and gradient values
+  cost_, grad_ = get_cost_and_grad([image])
+  
+  if cost_ &lt; desired_cost:
+    break
+  # alter image so output converges to 1
+  image -= (grad_ * lr)
+  # save image (not nessessary)
+  im = Image.fromarray(((image).astype(np.uint8) * 255).reshape(68, 218))
+  im.save(&quot;pngs/out_&quot;+str(im_count)+&quot;.png&quot;)
+  im_count += 1
+</code></pre>
+
+<p>The above code will save save all intermediate images as PNG images, You will find your flag in some of the images at an advanced iteration level.</p>
+
+<p>A Better solution to make a <code>GIF</code> that show how the flag evolves during time.Here is the code for it. Just make sure you have <code>Pillow</code> installed.</p>
+
+<pre><code class="language-python">&quot;&quot;&quot;
+Imports of previous codes here
+&quot;&quot;&quot;
+import keras
+from PIL import Image
+from numpy import numpy
+
+# generate a random image.
+image = np.random.rand(1, 68, 218).astype(np.float32)
+desired_cost = 0.1    # desired cost is gonna be 0.1
+lr = 1000             # Set the learning rate to 1000
+
+images_list = [] # make a list to store image instances
+
+&quot;&quot;&quot;
+Iterate until calculated cost &lt;= taegeted_cost
+&quot;&quot;&quot;
+while True:
+  # claculate both cost an gradient
+  cost_, grad_ = get_cost_and_grad([image])
+  if cost_ &lt; desired_cost:
+    break
+  
+  # updating image matrix
+  image -= (grad_ * lr)
+  # reshaping image to be stored (Needs Pillow)
+  im = Image.fromarray(((image).astype(np.uint8) * 255).reshape(68, 218))
+  images_list.append(im)
+
+images_list[0].save(&quot;animated_flag.gif&quot;, save_all=True, append_images=images_list[1:], duration=100, loop=0)
+
+</code></pre>
+
+<p>The above code will generate a <code>GIF</code> showing the evolution of the flag starting from a random image to a full <code>flag</code>.</p>
+
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557400189/animated_flag.gif" alt="animated_flag" /></p>
+
+<p>I will include the whole python script later.</p>
+
+<p>Thanks for Reading !</p>
 
 
         
