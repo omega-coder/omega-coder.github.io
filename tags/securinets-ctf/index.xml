@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>securinets-ctf on 0m3g4K0d3r&#39;s Security Blog</title>
-    <link>https://omega-coder.me/tags/securinets-ctf/</link>
+    <link>https://omega-coder.ninja/tags/securinets-ctf/</link>
     <description>Recent content in securinets-ctf on 0m3g4K0d3r&#39;s Security Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>admin@omega-coder.me (omega_coder)</managingEditor>
     <webMaster>admin@omega-coder.me (omega_coder)</webMaster>
     <lastBuildDate>Tue, 26 Mar 2019 17:37:37 +0200</lastBuildDate>
     
-	<atom:link href="https://omega-coder.me/tags/securinets-ctf/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://omega-coder.ninja/tags/securinets-ctf/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Securinets CTF 2k19 Lost Flag Writeup</title>
-      <link>https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/</link>
+      <link>https://omega-coder.ninja/post/securinets-ctf-2019-lost-flag-writeup/</link>
       <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
       <author>admin@omega-coder.me (omega_coder)</author>
-      <guid>https://omega-coder.me/post/securinets-ctf-2019-lost-flag-writeup/</guid>
+      <guid>https://omega-coder.ninja/post/securinets-ctf-2019-lost-flag-writeup/</guid>
       <description>Description    Category Points Solves     Forensics 994 19    
 Description : Help me get back my flag !
 URL: https://web8.ctfsecurinets.com/
