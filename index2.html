@@ -9,7 +9,6 @@ function send(data)
 onload = function() {
 	if (window.CrackMe !== undefined) {
 		send("found");
-	}
 		CrackMe.start('web2hard').then(msg => {
 		      console.log('start',msg);
 	      CrackMe.run().then(msg => {
@@ -17,6 +16,9 @@ onload = function() {
 		//document.getElementById('debug').style.display = 'inline';
 	      });
 	});
+	} else {
+		send("not found wtf");
+	}
 }
 </script>
 </body>
