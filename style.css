@@ -8,3 +8,11 @@
     -webkit-animation: cursor 1s infinite;
     animation: cursor 1s infinite;
 }
+
+a.read-more,
+a.read-more:active,
+a.read-more:hover {
+    background-color: #149414;
+    color: #f7f7f7;
+    padding: 10px 10px;
+}
