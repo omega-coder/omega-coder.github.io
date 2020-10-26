@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>streaming on Hello Friend</title>
+    
+    
+    
+    <link>https://yassinecherief.com/tags/streaming/</link>
+    <description>Recent content in streaming on Hello Friend</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Yassine CHERIEF</copyright>
+    <lastBuildDate>Tue, 18 Dec 2018 01:55:45 +0200</lastBuildDate>
+    
+	<atom:link href="https://yassinecherief.com/tags/streaming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Streaming server using NGINX and nginx-rtmp-module</title>
+      <link>https://yassinecherief.com/posts/streaming-server-using-nginx-and-nginx-rtmp-module/</link>
+      <pubDate>Tue, 18 Dec 2018 01:55:45 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/streaming-server-using-nginx-and-nginx-rtmp-module/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

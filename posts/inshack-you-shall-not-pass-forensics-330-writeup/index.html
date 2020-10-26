@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Challenge details.    Category Points Solves     Forensics 330 11    1. Challenge description  One of my friends is a show-off and I don&amp;rsquo;t like that.Help me find the backdoor he just boasted about! :DYou&amp;rsquo;ll find an image of his USB key here.And one last thing, my friend owns you-shall-not-pass.ctf.insecurity-insa.fr.
+ 2. Solution 2.1 Data Extraction Part By extracting the compressed file that was given to us, we find a raw image of an NTFS filesystem, you can verify that using the file command on linux."
+/>
+<meta
+  name="keywords"
+  content="cybersecurity, security, networking, ctf, writeups, education, blog, algeria, algerian, student"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://yassinecherief.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://yassinecherief.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://yassinecherief.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://yassinecherief.com/img/favicon.png" />
+
+
+<link href="https://yassinecherief.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup"/>
+<meta name="twitter:description" content="Challenge details.    Category Points Solves     Forensics 330 11    1. Challenge description  One of my friends is a show-off and I don&rsquo;t like that.Help me find the backdoor he just boasted about! :DYou&rsquo;ll find an image of his USB key here.And one last thing, my friend owns you-shall-not-pass.ctf.insecurity-insa.fr.
+ 2. Solution 2.1 Data Extraction Part By extracting the compressed file that was given to us, we find a raw image of an NTFS filesystem, you can verify that using the file command on linux."/>
+
+
+
+<meta property="og:title" content="INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup" />
+<meta property="og:description" content="Challenge details.    Category Points Solves     Forensics 330 11    1. Challenge description  One of my friends is a show-off and I don&rsquo;t like that.Help me find the backdoor he just boasted about! :DYou&rsquo;ll find an image of his USB key here.And one last thing, my friend owns you-shall-not-pass.ctf.insecurity-insa.fr.
+ 2. Solution 2.1 Data Extraction Part By extracting the compressed file that was given to us, we find a raw image of an NTFS filesystem, you can verify that using the file command on linux." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/" />
+<meta property="article:published_time" content="2019-05-05T18:03:05+02:00" />
+<meta property="article:modified_time" content="2019-05-05T18:03:05+02:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >./1337.sh</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/posts">Posts</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2019-05-05
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by CHERIEF Yassine</span
+        >
+
+
+      
+        <span class="post-read-time"
+          >— 4 min read</span
+        >
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="https://yassinecherief.com/tags/writeup/">#writeup</a>&nbsp;
+        
+          <a href="https://yassinecherief.com/tags/port-knocking/">#port-knocking</a>&nbsp;
+        
+          <a href="https://yassinecherief.com/tags/forensics/">#forensics</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="challenge-details">Challenge details.</h1>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Points</strong></th>
+<th><strong>Solves</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Forensics</td>
+<td>330</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<h1 id="1-challenge-description">1. Challenge description</h1>
+<blockquote>
+<p>One of my friends is a show-off and I don&rsquo;t like that.<!-- raw HTML omitted --> Help me find the backdoor he just boasted about! :D<!-- raw HTML omitted -->You&rsquo;ll find an image of his USB key <a href="https://static.ctf.insecurity-insa.fr/3b89ef8bb51773c8f3478bf356271ac762ec96c3.tar.gz">here</a>.<!-- raw HTML omitted -->And one last thing, my friend owns  <code>you-shall-not-pass.ctf.insecurity-insa.fr</code>.</p>
+</blockquote>
+<h1 id="2-solution">2. Solution</h1>
+<h2 id="21-udata-extraction-partu">2.1 <!-- raw HTML omitted -->Data Extraction Part<!-- raw HTML omitted --></h2>
+<p>By extracting the compressed file that was given to us, we find a raw image of an NTFS filesystem, you can verify that using the <code>file</code> command on linux. (probably made with <code>dd</code> considering the filename :D )</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file dd.img
+</code></pre></div><p>result of the <code>file</code> command is shown below.</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557080003/Screenshot_2019-05-05_19-15-58.png" alt="file_command_output"></p>
+<p>First I tried to mount the filesystem and see what we&rsquo;ve got inside. (first you create a folder <code>/mnt/you_shall_not_pass</code>), then mount the image using the <code>mount</code> command on linux.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo mount -o loop -t ntfs dd.img /mnt/you_shall_not_pass
+</code></pre></div><p>After mounting the filesystem, We got a bunch of weird folders &amp; files, majority of them were text files containing some <strong><code>Bacon Ipsum</code></strong> (not really important)  and one MP4 video file,  the video file contained a scene from <code>LOTR</code> (Lord Of The Ring) movie (<code>That was a good scene, where Gandalf says &quot;YOU SHALL NOT PAAASSSSS!&quot;</code>).</p>
+<p>Well, let&rsquo;s start the work, I watched the video, read the texts with no progress at all, then i said let&rsquo;s check the filesystem for some <code>hidden</code> files or <code>hidden</code> strings, I first tried the <code>strings</code> command, didn&rsquo;t help much. Then I tried to do <code>tail</code> on the filesystem, after doing <code>tail</code> on the image, something caught my EYE :D, which looks like a <code>Base64 encoded string</code>.</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557081352/Screenshot_2019-05-05_19-38-33.png" alt="base64_encoded_string"></p>
+<pre><code class="language-base64" data-lang="base64">H4sIAOq1yVwAA6tWUFBKyc8vUrJSMDIAAh0gvzi1sDQ1LzkVKBatAATVSgX5RSVAnqGBgSFQhVJB
+UX5JPpCvFOoSoFSrg67Gkgg1RihqQpyxqSHGLjMizLEgwhxi7DIgwi4DIswxIcIcI0xzFBRiQbGT
+X5CaF1+cWpyYC4ogJXdPX19XhRAPVwU3H0d3hQCfKD09PSVoNMZn5pWkFpUl5oAN1YHGNbKoaS0A
+gssCMwICAAA=
+</code></pre><p>It starts with <strong><code>BGZ</code></strong> and ends with <strong><code>EGZ</code></strong> !,well i guessed that right away, it&rsquo;s a <code>gzip compressed</code> file.</p>
+<p>let&rsquo;s decode the base64 and see whats inside the file,</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;H4sIAOq1yVwAA6tWUFBKyc8vUrJSMDIAAh0gvzi1sDQ1LzkVKBatAATVSgX5RSVAnqGBgSFQhVJB
+</span><span style="color:#e6db74">UX5JPpCvFOoSoFSrg67Gkgg1RihqQpyxqSHGLjMizLEgwhxi7DIgwi4DIswxIcIcI0xzFBRiQbGT
+</span><span style="color:#e6db74">X5CaF1+cWpyYC4ogJXdPX19XhRAPVwU3H0d3hQCfKD09PSVoNMZn5pWkFpUl5oAN1YHGNbKoaS0A
+</span><span style="color:#e6db74">gssCMwICAAA=&#34;</span> | base64 -d &gt; file.gz
+</code></pre></div><p>Let&rsquo;s unzip the file using <code>gunzip</code> comamnd, and make sure you have <code>.gz</code> file extension.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gunzip file.gz
+</code></pre></div><p>You will get in result a file named <code>file.tar</code>, but its just a text file, not a tar archive, you can verify it using the <code>file</code> command.</p>
+<p>here is the content of the <code>file.tar</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;door&#34;</span>: <span style="color:#ae81ff">20000</span>,
+    <span style="color:#f92672">&#34;sequence&#34;</span>: [{
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10010</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10090</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10020</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10010</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10060</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10080</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10010</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10000</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10000</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10040</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;TCP&#34;</span>
+    }, {
+        <span style="color:#f92672">&#34;port&#34;</span>: <span style="color:#ae81ff">10020</span>,
+        <span style="color:#f92672">&#34;proto&#34;</span>: <span style="color:#e6db74">&#34;UDP&#34;</span>
+    }],
+    <span style="color:#f92672">&#34;open_sesame&#34;</span>: <span style="color:#e6db74">&#34;GIMME THE FLAG PLZ...&#34;</span>,
+    <span style="color:#f92672">&#34;seq_interval&#34;</span>: <span style="color:#ae81ff">10</span>,
+    <span style="color:#f92672">&#34;door_interval&#34;</span>: <span style="color:#ae81ff">5</span>
+}
+</code></pre></div><h2 id="22-uport-knocking-tasku">2.2 <!-- raw HTML omitted -->Port Knocking Task<!-- raw HTML omitted --></h2>
+<p>We got a <code>JSON</code> file, it have a bunch of ports and some infos. <code>[seq_interval, door_interval, open_sesame] and door</code></p>
+<p>This is <code>OBVIOUSLY</code> a <code>port knocking</code> task, if you don&rsquo;t know about <code>port knocking</code> just <strong>GOOGLE IT!!</strong></p>
+<blockquote>
+<p>In computer networking, <code>port knocking</code> is a method of externally opening <code>ports</code> on a firewall by generating a connection attempt on a set of prespecified <code>closed ports</code>.</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<p>So Basically, we gonna knock the ports in the given sequence according to the protocol in an interval of <code>10s</code> (<em>this was clarified by the challenge author @Paul</em>) to be able to connect to the service on port <code>20000</code> (<em>Our door :D</em>).</p>
+<p>Here is my script for doing the port knocking and getting the flag.
+It knocks the sequence then connects to service on port <code>20000</code>, sends the <code>open_sesame</code> string and gets the flag.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> socket
+<span style="color:#f92672">import</span> select
+<span style="color:#f92672">import</span> json
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Knocker</span>(object):
+    <span style="color:#66d9ef">def</span> __init__(self, ports_proto: list, delay<span style="color:#f92672">=</span><span style="color:#ae81ff">400</span>, udp<span style="color:#f92672">=</span>False, host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>):
+        self<span style="color:#f92672">.</span>timeout <span style="color:#f92672">=</span> timeout <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000</span>
+        self<span style="color:#f92672">.</span>delay <span style="color:#f92672">=</span> delay <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000</span>
+        self<span style="color:#f92672">.</span>default_udp <span style="color:#f92672">=</span> udp
+        self<span style="color:#f92672">.</span>ports_proto <span style="color:#f92672">=</span> ports_proto
+
+        self<span style="color:#f92672">.</span>address_family, _, _, _, (self<span style="color:#f92672">.</span>ip_address, _) <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>getaddrinfo(
+                host<span style="color:#f92672">=</span>host,
+                port<span style="color:#f92672">=</span>None,
+                flags<span style="color:#f92672">=</span>socket<span style="color:#f92672">.</span>AI_ADDRCONFIG
+            )[<span style="color:#ae81ff">0</span>]
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">knock_it</span>(self):
+        last_index <span style="color:#f92672">=</span> len(self<span style="color:#f92672">.</span>ports_proto) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">for</span> i, port <span style="color:#f92672">in</span> enumerate(self<span style="color:#f92672">.</span>ports_proto):
+            use_udp <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>default_udp
+            <span style="color:#66d9ef">if</span> port<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;:&#39;</span>) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+                port, protocol <span style="color:#f92672">=</span> port<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;:&#39;</span>, <span style="color:#ae81ff">2</span>)
+                <span style="color:#66d9ef">if</span> protocol <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;TCP&#39;</span>:
+                    use_udp <span style="color:#f92672">=</span> False
+                <span style="color:#66d9ef">elif</span> protocol <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;UDP&#39;</span>:
+                    use_udp <span style="color:#f92672">=</span> True
+                <span style="color:#66d9ef">else</span>:
+                    error <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;WTF!&#39;</span>
+                    <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(error<span style="color:#f92672">.</span>format(protocol))
+
+            s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(self<span style="color:#f92672">.</span>address_family, socket<span style="color:#f92672">.</span>SOCK_DGRAM <span style="color:#66d9ef">if</span> use_udp <span style="color:#66d9ef">else</span> socket<span style="color:#f92672">.</span>SOCK_STREAM)
+            s<span style="color:#f92672">.</span>setblocking(False)
+
+            socket_address <span style="color:#f92672">=</span> (self<span style="color:#f92672">.</span>ip_address, int(port))
+            <span style="color:#66d9ef">if</span> use_udp:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Knocking port {} using UDP&#34;</span><span style="color:#f92672">.</span>format(port))
+                s<span style="color:#f92672">.</span>sendto(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&#39;</span>, socket_address)
+            <span style="color:#66d9ef">else</span>:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Knoocking port {} using TCP&#34;</span><span style="color:#f92672">.</span>format(port))
+                s<span style="color:#f92672">.</span>connect_ex(socket_address)
+                select<span style="color:#f92672">.</span>select([s], [s], [s], self<span style="color:#f92672">.</span>timeout)
+
+            s<span style="color:#f92672">.</span>close()
+
+            <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>delay <span style="color:#f92672">and</span> i <span style="color:#f92672">!=</span> last_index:
+                time<span style="color:#f92672">.</span>sleep(self<span style="color:#f92672">.</span>delay)
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+    host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;you-shall-not-pass.ctf.insecurity-insa.fr&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Getting Data ...&#34;</span>)
+    json_file <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;file.tar&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>)
+    data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>load(json_file)
+    open_sesame <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#34;open_sesame&#34;</span>]
+    ports_proto <span style="color:#f92672">=</span> [str(i[<span style="color:#e6db74">&#34;port&#34;</span>])<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">+</span>i[<span style="color:#e6db74">&#34;proto&#34;</span>] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> data[<span style="color:#e6db74">&#34;sequence&#34;</span>]]
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Knocking Ports now...&#34;</span>)
+    Knocker(ports_proto, delay<span style="color:#f92672">=</span><span style="color:#ae81ff">900</span>, host<span style="color:#f92672">=</span>host)<span style="color:#f92672">.</span>knock_it()
+    time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">1</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Asking for Flag ...&#34;</span>)
+    <span style="color:#66d9ef">try</span>:
+        s <span style="color:#f92672">=</span> socket<span style="color:#f92672">.</span>socket(socket<span style="color:#f92672">.</span>AF_INET, socket<span style="color:#f92672">.</span>SOCK_STREAM)
+        s<span style="color:#f92672">.</span>connect((host, int(data[<span style="color:#e6db74">&#34;door&#34;</span>])))
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[!] CONNECTION FAILED!!!, Port may not be opened&#34;</span>)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] DOOR OPENED&#34;</span>)
+        s<span style="color:#f92672">.</span>send(open_sesame<span style="color:#f92672">.</span>encode())
+        <span style="color:#66d9ef">try</span>:
+            flag <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">2014</span>)<span style="color:#f92672">.</span>decode()
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Got flag: &#34;</span>, flag)
+        <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;NOTHING&#34;</span>)
+    <span style="color:#66d9ef">finally</span>:
+        s<span style="color:#f92672">.</span>close()
+
+</code></pre></div><p>Here is your FLAG: <code>INSA{213dca08e606ef9e5352f4bdd8b6dd9d6c559e9ce76b674ae3739a34c5c3be37}</code></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="https://yassinecherief.com/posts/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/">
+                  <span class="button__text">AngstromCTF 2019 | No SEQUELS and No SEQUELS 2 Web Writeup</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">Yassine CHERIEF</div>
+      
+  </div>
+</footer>
+
+<script src="https://yassinecherief.com/assets/main.js"></script>
+<script src="https://yassinecherief.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

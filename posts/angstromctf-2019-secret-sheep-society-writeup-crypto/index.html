@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        AngstromCTF 2019 Secret Sheep Society | CTF Writeup ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Challenge details    Category Points Solves     Crypto 120 98    TL;DR  Spotting the weakness (AES with CBC Mode). Get token. Flipping specific bytes in session json (turn false to true ). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.  Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for."
+/>
+<meta
+  name="keywords"
+  content="cybersecurity, security, networking, ctf, writeups, education, blog, algeria, algerian, student"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://yassinecherief.com/posts/angstromctf-2019-secret-sheep-society-writeup-crypto/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://yassinecherief.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://yassinecherief.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://yassinecherief.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://yassinecherief.com/img/favicon.png" />
+
+
+<link href="https://yassinecherief.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="AngstromCTF 2019 Secret Sheep Society | CTF Writeup"/>
+<meta name="twitter:description" content="Challenge details    Category Points Solves     Crypto 120 98    TL;DR  Spotting the weakness (AES with CBC Mode). Get token. Flipping specific bytes in session json (turn false to true ). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.  Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for."/>
+
+
+
+<meta property="og:title" content="AngstromCTF 2019 Secret Sheep Society | CTF Writeup" />
+<meta property="og:description" content="Challenge details    Category Points Solves     Crypto 120 98    TL;DR  Spotting the weakness (AES with CBC Mode). Get token. Flipping specific bytes in session json (turn false to true ). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.  Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yassinecherief.com/posts/angstromctf-2019-secret-sheep-society-writeup-crypto/" />
+<meta property="article:published_time" content="2019-04-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-04-24T00:00:00+00:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >./1337.sh</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/posts">Posts</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">AngstromCTF 2019 Secret Sheep Society | CTF Writeup</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2019-04-24
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by K40t1k</span
+        >
+
+
+      
+        <span class="post-read-time"
+          >— 6 min read</span
+        >
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="https://yassinecherief.com/tags/ctf/">#ctf</a>&nbsp;
+        
+          <a href="https://yassinecherief.com/tags/cryptography/">#cryptography</a>&nbsp;
+        
+          <a href="https://yassinecherief.com/tags/security/">#security</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+        <h2>Table of Contents</h2>
+        <aside class="table-of-contents"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#challenge-details">Challenge details</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#challenge-description">Challenge Description</a></li>
+    <li><a href="#challenge-source">Challenge Source</a></li>
+    <li><a href="#what-is-the-app-doing">What is the app doing</a>
+      <ul>
+        <li><a href="#we-know">We know</a></li>
+        <li><a href="#we-dont-know">We don&rsquo;t know</a></li>
+      </ul>
+    </li>
+    <li><a href="#fully-automated-exploit-with-python">Fully Automated Exploit with Python</a></li>
+  </ul>
+</nav></aside>
+      
+      <h2 id="challenge-details">Challenge details</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"><strong>Category</strong></th>
+<th style="text-align:right"><strong>Points</strong></th>
+<th style="text-align:right"><strong>Solves</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Crypto</td>
+<td style="text-align:right">120</td>
+<td style="text-align:right">98</td>
+</tr>
+</tbody>
+</table>
+<h1 id="tldr">TL;DR</h1>
+<ul>
+<li>Spotting the weakness (AES with CBC Mode).</li>
+<li>Get token.</li>
+<li>Flipping specific bytes in session json (turn false to true ).</li>
+<li>manipulate token with flipped bytes.</li>
+<li>Send manipulated token to page.</li>
+<li>Get the flag.</li>
+</ul>
+<h2 id="challenge-description">Challenge Description</h2>
+<blockquote>
+<p>The sheep are up to no good. They have a <a href="https://secretsheepsociety.2019.chall.actf.co/">web portal</a> for their secret society, which we have the source for. It seems fairly easy to join the organization, but climbing up its ranks is a different story. <!-- raw HTML omitted -->Author: defund</p>
+</blockquote>
+<h2 id="challenge-source">Challenge Source</h2>
+<p>challenge app source can be found <a href="https://github.com/omega-coder/ctf-writeups/tree/master/AngstromCTF_2k19_Quals/Secret_Sheep_Society/app_source">here</a></p>
+<h2 id="what-is-the-app-doing">What is the app doing</h2>
+<p>we have three important routes <code>/</code>, <code>/enter</code> and <code>/exit</code>.</p>
+<ul>
+<li><code>/</code> will show the flag if we have admin access.</li>
+<li><code>/enter</code> accepts an input called <code>handle</code> and sets a cookie named <code>token</code> which is simply the base64 encoding of the <code>session</code> encryption using <code>AES</code> with <code>CBC</code> Mode and using Padding also.</li>
+<li><code>/exit</code> will simply <strong>unset</strong> the <strong><code>token</code></strong> cookie.</li>
+</ul>
+<h3 id="we-know">We know</h3>
+<ol>
+<li>the format of the session which is : <code>{&quot;admin&quot;: false, &quot;handle&quot;: &quot;some_input_we_control&quot;}</code></li>
+<li>encryption is using <code>AES_CBC</code> with <code>BLOCK_SIZE = 16</code>.</li>
+<li>We have the ciphertext.</li>
+</ol>
+<h3 id="we-dont-know">We don&rsquo;t know</h3>
+<ol>
+<li>The Key.</li>
+</ol>
+<p><strong><code>NOTE: I haven't used the browser for this task, i still don't know what the UI looks like!!</code></strong></p>
+<p>let&rsquo;s see this piece of code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/enter&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;POST&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">enter</span>():
+	handle <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;handle&#39;</span>)
+	session <span style="color:#f92672">=</span> {
+		<span style="color:#e6db74">&#39;admin&#39;</span>: False,
+		<span style="color:#e6db74">&#39;handle&#39;</span>: handle
+	}
+	token <span style="color:#f92672">=</span> manager<span style="color:#f92672">.</span>pack(session)
+	response <span style="color:#f92672">=</span> redirect(<span style="color:#e6db74">&#39;/&#39;</span>)
+	response<span style="color:#f92672">.</span>set_cookie(<span style="color:#e6db74">&#39;token&#39;</span>, token)
+    <span style="color:#66d9ef">return</span> response
+</code></pre></div><p>To get a cookie we post to <code>/enter</code> with handle data parameter set to anything we want, after that the session variable gets set and passed to <code>manager.pack(session)</code> which will return a token base64 encoded.</p>
+<p>Let&rsquo;s see now how does the pack method works. (.pack is defined in <code>manage.py file</code>).<br>
+<strong>pack()</strong> takes a python dictionary as an argument and return a base64 encoded token.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Manager</span>:
+
+	BLOCK_SIZE <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>block_size
+
+	<span style="color:#66d9ef">def</span> __init__(self, key):
+		self<span style="color:#f92672">.</span>key <span style="color:#f92672">=</span> key
+
+	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pack</span>(self, session):
+		cipher <span style="color:#f92672">=</span> AES<span style="color:#f92672">.</span>new(self<span style="color:#f92672">.</span>key, AES<span style="color:#f92672">.</span>MODE_CBC)
+		iv <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>iv
+		dec <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>dumps(session)<span style="color:#f92672">.</span>encode()
+		enc <span style="color:#f92672">=</span> cipher<span style="color:#f92672">.</span>encrypt(pad(dec, self<span style="color:#f92672">.</span>BLOCK_SIZE))
+		raw <span style="color:#f92672">=</span> iv <span style="color:#f92672">+</span> enc
+        <span style="color:#66d9ef">return</span> base64<span style="color:#f92672">.</span>b64encode(raw)
+</code></pre></div><ol>
+<li>creates a new AES cipher with CBC mode</li>
+<li>get an IV</li>
+<li>get string representation of the json object session.</li>
+<li>pad data and encrypt it with <code>AES_CBC</code>.</li>
+<li>return <code>base64(iv + enc)</code>.</li>
+</ol>
+<blockquote>
+<p><strong><code>Note: iv is not encrypted, the IV is the first 16 bytes of the token found in cookie</code></strong></p>
+</blockquote>
+<p>Our string representation of the session json object is as follow:</p>
+<p>This is the default json object string repr that we will have, provided that we enter <code>xx</code> as handle paramter. (Only an example).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{<span style="color:#f92672">&#34;admin&#34;</span>: <span style="color:#66d9ef">false</span>, <span style="color:#f92672">&#34;handle&#34;</span>: <span style="color:#e6db74">&#34;xx&#34;</span>}
+</code></pre></div><p>We obviously need to turn that <code>false</code> to <!-- raw HTML omitted -->true <!-- raw HTML omitted -->, since <code>false</code> is 5 bytes long and <code>true</code> is only 4 bytes long, we can replace <code>false</code> with <!-- raw HTML omitted -->true <!-- raw HTML omitted --> with an extra space at the end, that won&rsquo;t make a difference when parser by JSON.</p>
+<p>if we provide handle with value <code>xx</code> then json string representation will be on exactly two blocks.
+(<code>32 Bytes</code>).</p>
+<p>The AES encryption will be 64 Bytes (4 Blocks of 16 bytes each), because IV is on 16 bytes, json string on 32 Bytes and padding on One block (16 Bytes)</p>
+<p><code>16 + 32 + 16 = 64</code></p>
+<pre><code>.................. = IV (IV is known to us)
+{&quot;admin&quot;: false,   ==&gt; First Plaintext Block
+ &quot;handle&quot;: &quot;xx&quot;}   ==&gt; Second Plaintext Block
+\x10\x10\x10\x10 ... \x10 ==&gt; last padding block of size 16 
+
+</code></pre><p>Now let&rsquo;s do bit-flipping and change the  <!-- raw HTML omitted -->false<!-- raw HTML omitted --> to <!-- raw HTML omitted -->true <!-- raw HTML omitted -->.</p>
+<p>To understand the attack, we need to closely look how decryption takes place in this mode:</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1556110161/601px-cbc_decryption-svg.png" alt="aes_cbc_decryption_scheme"></p>
+<p>Let&rsquo;s suppose our <code>{&quot;admin&quot;: false,</code> is our first block, this plaintext block is resulting from <code>XORing</code> the IV (Initialization Vector) with the first ciphertext block, as you can see from the figure above.We can manipulate the cookie returned by the server to forge a cookie that we decoded get json encoded to <code>{&quot;admin&quot;: true , &quot;handle&quot;: &quot;xx&quot;}</code>. A rule says that whenever you change one byte (&lsquo;flips&rsquo;) at an offset
+in a given ciphertext block, the same offset is changed in the next plaintext block (see figure below).</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1556114028/082113_1459_cbcbyteflip3.jpg" alt="cbc_flip_byte"></p>
+<h2 id="fully-automated-exploit-with-python">Fully Automated Exploit with Python</h2>
+<p>let&rsquo;s first try to get a token by posting handle data to <code>/enter</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">import</span> re
+URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://secretsheepsociety.2019.chall.actf.co/&#34;</span>
+
+session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
+
+<span style="color:#75715e"># generate token from /enter route </span>
+token <span style="color:#f92672">=</span> None
+enter_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;handle&#34;</span>: <span style="color:#e6db74">&#34;xx&#34;</span>}
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Sending &#39;xx&#39; as handle payload!&#34;</span>)
+token_exp <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;token=(.*);&#39;</span>)
+req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(URL<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;enter&#34;</span>, data<span style="color:#f92672">=</span>enter_data, verify<span style="color:#f92672">=</span>False, allow_redirects<span style="color:#f92672">=</span>False)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Made request to /enter&#34;</span>)
+<span style="color:#66d9ef">if</span> req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">302</span>: <span style="color:#75715e"># means we are being redirected to / </span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Got 302 Redirect request&#34;</span>)
+    match <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(token_exp, req<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#34;Set-Cookie&#34;</span>])
+    <span style="color:#66d9ef">if</span> match:
+        token <span style="color:#f92672">=</span> match<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Got token : &#34;</span>, token)
+</code></pre></div><p>Now let&rsquo;s see the full script that will get a token from <code>/enter</code> and manipulate it and send it back to man route (index.html) to get the final flag.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> requests
+<span style="color:#f92672">from</span> base64 <span style="color:#f92672">import</span> b64encode, b64decode
+<span style="color:#f92672">import</span> re
+URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://secretsheepsociety.2019.chall.actf.co/&#34;</span>
+
+session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
+
+<span style="color:#75715e"># generate token from /enter route </span>
+token <span style="color:#f92672">=</span> None
+enter_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;handle&#34;</span>: <span style="color:#e6db74">&#34;xx&#34;</span>}
+<span style="color:#75715e"># xx is just to make it 2 blocks in size</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Sending &#39;xx&#39; as handle payload!&#34;</span>)
+token_exp <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;token=(.*);&#39;</span>)
+req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>post(URL<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;enter&#34;</span>, data<span style="color:#f92672">=</span>enter_data, verify<span style="color:#f92672">=</span>False, allow_redirects<span style="color:#f92672">=</span>False)
+<span style="color:#75715e"># allow redirects is set to False because if set to True we won&#39;t be able to retrive</span>
+<span style="color:#75715e"># the cookie set by /enter</span>
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Made request to /enter&#34;</span>)
+<span style="color:#66d9ef">if</span> req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">302</span>: <span style="color:#75715e"># we are being redirected to /</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[?] Got 302 Redirect request&#34;</span>)
+    match <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(token_exp, req<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#34;Set-Cookie&#34;</span>])
+    <span style="color:#66d9ef">if</span> match:
+        token <span style="color:#f92672">=</span> match<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Got token : &#34;</span>, token)
+
+<span style="color:#75715e"># &#39;f&#39; is located at offset 10 in the second block.</span>
+<span style="color:#75715e"># &#39;a&#39; is located at offset 11 in the second block.</span>
+<span style="color:#75715e"># &#39;l&#39; ....</span>
+<span style="color:#75715e"># &#39;s&#39; ....</span>
+<span style="color:#75715e"># &#39;e&#39; ....</span>
+<span style="color:#66d9ef">if</span> token <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+    ct <span style="color:#f92672">=</span> b64decode(token)
+    manipulated_token <span style="color:#f92672">=</span> list(ct)
+    manipulated_token[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;f&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;t&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">11</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">11</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;r&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">12</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;l&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;u&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">13</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">13</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;s&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;e&#39;</span>)
+    manipulated_token[<span style="color:#ae81ff">14</span>] <span style="color:#f92672">=</span> manipulated_token[<span style="color:#ae81ff">14</span>] <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39;e&#39;</span>) <span style="color:#f92672">^</span> ord(<span style="color:#e6db74">&#39; &#39;</span>)
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] Flipped Bytes 10, 11, 12, 13 and 14&#34;</span>)
+
+    final_token <span style="color:#f92672">=</span> b64encode(bytes(manipulated_token))
+
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] generated new token &#34;</span>, final_token<span style="color:#f92672">.</span>decode())
+
+<span style="color:#66d9ef">if</span> final_token <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> None:
+    session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>Session()
+    cookies <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;token&#34;</span>: final_token<span style="color:#f92672">.</span>decode()}
+    
+    <span style="color:#75715e"># if token is correct then session will contain {&#34;admin&#34;: True, &#34;handle&#34;: &#34;xx&#34;} </span>
+    <span style="color:#75715e"># we will be able to get the flag</span>
+
+    flag_exp <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;actf{.*}&#39;</span>)
+    req <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(URL, cookies<span style="color:#f92672">=</span>cookies)
+    <span style="color:#66d9ef">if</span> req<span style="color:#f92672">.</span>status_code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>:
+        m <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>search(flag_exp, req<span style="color:#f92672">.</span>text)
+        <span style="color:#66d9ef">if</span> m:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[+] FLAG: &#34;</span>, m<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">0</span>))
+</code></pre></div><p>Note: This worked because the block we wanted to manipulate was the second block, which we can of course manipulate using the IV block only, if it was another different block then the solution would be a little harder than this.</p>
+<p><code>FLAG = actf{shep_the_conqueror_slumbers}</code></p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://yassinecherief.com/posts/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">AngstromCTF 2019 | No SEQUELS and No SEQUELS 2 Web Writeup</span>
+                </a>
+              </span>
+            
+            
+              <span class="button next">
+                <a href="https://yassinecherief.com/posts/hacklab-esgi-2019-rookie-web-writeup/">
+                  <span class="button__text">Hacklab ESGI 2019 |  Rookie Web100 Writeup</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">Yassine CHERIEF</div>
+      
+  </div>
+</footer>
+
+<script src="https://yassinecherief.com/assets/main.js"></script>
+<script src="https://yassinecherief.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

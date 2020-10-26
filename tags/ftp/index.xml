@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ftp on Hello Friend</title>
+    
+    
+    
+    <link>https://yassinecherief.com/tags/ftp/</link>
+    <description>Recent content in ftp on Hello Friend</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Yassine CHERIEF</copyright>
+    <lastBuildDate>Mon, 01 Apr 2019 23:46:29 +0200</lastBuildDate>
+    
+	<atom:link href="https://yassinecherief.com/tags/ftp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setup FTPS server on Archlinux</title>
+      <link>https://yassinecherief.com/posts/setup-ftp-and-ftps-server-on-archlinux-server/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/setup-ftp-and-ftps-server-on-archlinux-server/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          History of FTP servers The original specification for the File Transfer Protocol was written by Abhay Bhushan and published as RFC 114 on 16 April 1971. Until 1980, FTP was still running on NCP (Network Control Program) the predecessor of TCP/IP, the protocol was later replaced by a TCP/IP version, RFC 765 (June 1980). On September 1998, RFC 2428 added IPv6 support and defined a new type of passive mode.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

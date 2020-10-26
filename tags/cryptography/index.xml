@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cryptography on Hello Friend</title>
+    
+    
+    
+    <link>https://yassinecherief.com/tags/cryptography/</link>
+    <description>Recent content in cryptography on Hello Friend</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Yassine CHERIEF</copyright>
+    <lastBuildDate>Wed, 24 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://yassinecherief.com/tags/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AngstromCTF 2019 Secret Sheep Society | CTF Writeup</title>
+      <link>https://yassinecherief.com/posts/angstromctf-2019-secret-sheep-society-writeup-crypto/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/angstromctf-2019-secret-sheep-society-writeup-crypto/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Challenge details    Category Points Solves     Crypto 120 98    TL;DR  Spotting the weakness (AES with CBC Mode). Get token. Flipping specific bytes in session json (turn false to true ). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.  Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

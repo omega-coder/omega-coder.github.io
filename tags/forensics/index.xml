@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>forensics on Hello Friend</title>
+    
+    
+    
+    <link>https://yassinecherief.com/tags/forensics/</link>
+    <description>Recent content in forensics on Hello Friend</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Yassine CHERIEF</copyright>
+    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
+    
+	<atom:link href="https://yassinecherief.com/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup</title>
+      <link>https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Challenge details.    Category Points Solves     Forensics 330 11    1. Challenge description  One of my friends is a show-off and I don&amp;rsquo;t like that.Help me find the backdoor he just boasted about! :DYou&amp;rsquo;ll find an image of his USB key here.And one last thing, my friend owns you-shall-not-pass.ctf.insecurity-insa.fr.
+ 2. Solution 2.1 Data Extraction Part By extracting the compressed file that was given to us, we find a raw image of an NTFS filesystem, you can verify that using the file command on linux.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

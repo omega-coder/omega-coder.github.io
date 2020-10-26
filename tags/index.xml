@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Hello Friend</title>
+    
+    
+    
+    <link>https://yassinecherief.com/tags/</link>
+    <description>Recent content in Tags on Hello Friend</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Yassine CHERIEF</copyright>
+    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
+    
+	<atom:link href="https://yassinecherief.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>forensics</title>
+      <link>https://yassinecherief.com/tags/forensics/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/forensics/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>port-knocking</title>
+      <link>https://yassinecherief.com/tags/port-knocking/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/port-knocking/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>writeup</title>
+      <link>https://yassinecherief.com/tags/writeup/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>ctf</title>
+      <link>https://yassinecherief.com/tags/ctf/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/ctf/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>mongodb</title>
+      <link>https://yassinecherief.com/tags/mongodb/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/mongodb/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>nosql</title>
+      <link>https://yassinecherief.com/tags/nosql/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/nosql/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>nosql-injection</title>
+      <link>https://yassinecherief.com/tags/nosql-injection/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/nosql-injection/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>https://yassinecherief.com/tags/web/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/web/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>cryptography</title>
+      <link>https://yassinecherief.com/tags/cryptography/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/cryptography/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>https://yassinecherief.com/tags/security/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/security/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>exploit</title>
+      <link>https://yassinecherief.com/tags/exploit/</link>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/exploit/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>gopher</title>
+      <link>https://yassinecherief.com/tags/gopher/</link>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/gopher/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>archlinux</title>
+      <link>https://yassinecherief.com/tags/archlinux/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/archlinux/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>ftp</title>
+      <link>https://yassinecherief.com/tags/ftp/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/ftp/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>tutorial</title>
+      <link>https://yassinecherief.com/tags/tutorial/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/tutorial/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://yassinecherief.com/tags/nginx/</link>
+      <pubDate>Tue, 18 Dec 2018 01:55:45 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/nginx/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>streaming</title>
+      <link>https://yassinecherief.com/tags/streaming/</link>
+      <pubDate>Tue, 18 Dec 2018 01:55:45 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/tags/streaming/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Hello Friend</title>
+    
+    
+    
+    <link>https://yassinecherief.com/posts/</link>
+    <description>Recent content in Posts on Hello Friend</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Yassine CHERIEF</copyright>
+    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
+    
+	<atom:link href="https://yassinecherief.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup</title>
+      <link>https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Challenge details.    Category Points Solves     Forensics 330 11    1. Challenge description  One of my friends is a show-off and I don&amp;rsquo;t like that.Help me find the backdoor he just boasted about! :DYou&amp;rsquo;ll find an image of his USB key here.And one last thing, my friend owns you-shall-not-pass.ctf.insecurity-insa.fr.
+ 2. Solution 2.1 Data Extraction Part By extracting the compressed file that was given to us, we find a raw image of an NTFS filesystem, you can verify that using the file command on linux.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>AngstromCTF 2019 | No SEQUELS and No SEQUELS 2 Web Writeup</title>
+      <link>https://yassinecherief.com/posts/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/</link>
+      <pubDate>Fri, 26 Apr 2019 01:49:01 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/angstromctf-2019-no-sequels-and-no-sequels2-web-writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          This blog post contains the writeup for two challenges (No SEQUELS &amp;amp; No SEQUELS 2), because they are related.
+So let&amp;rsquo;s start with No SEQUELS first.
+1. No SEQUELS 1 Category: Web
+Points: 50
+ 1.2 Challenge Description  The prequels sucked, and the sequels aren&amp;rsquo;t much better, but at least we always have the original trilogy.
+  Hint said : MongoDB is a safer alternative to SQL, right?
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>AngstromCTF 2019 Secret Sheep Society | CTF Writeup</title>
+      <link>https://yassinecherief.com/posts/angstromctf-2019-secret-sheep-society-writeup-crypto/</link>
+      <pubDate>Wed, 24 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/angstromctf-2019-secret-sheep-society-writeup-crypto/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Challenge details    Category Points Solves     Crypto 120 98    TL;DR  Spotting the weakness (AES with CBC Mode). Get token. Flipping specific bytes in session json (turn false to true ). manipulate token with flipped bytes. Send manipulated token to page. Get the flag.  Challenge Description  The sheep are up to no good. They have a web portal for their secret society, which we have the source for.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Hacklab ESGI 2019 |  Rookie Web100 Writeup</title>
+      <link>https://yassinecherief.com/posts/hacklab-esgi-2019-rookie-web-writeup/</link>
+      <pubDate>Mon, 08 Apr 2019 10:59:30 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/hacklab-esgi-2019-rookie-web-writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Challenge Description    Category Points Solves     web 100 18    This is the URL for the challenge.
+URL:http://ctf.hacklab-esgi.org:8082/
+So, as soon as we visit the given URL, we get a simple web page saying Website Checker and the title saying super curling (this gonna be fun!!). we notice that there is one input in the page, whatever you give as input gets passed to curl as a parameter.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Setup FTPS server on Archlinux</title>
+      <link>https://yassinecherief.com/posts/setup-ftp-and-ftps-server-on-archlinux-server/</link>
+      <pubDate>Mon, 01 Apr 2019 23:46:29 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/setup-ftp-and-ftps-server-on-archlinux-server/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          History of FTP servers The original specification for the File Transfer Protocol was written by Abhay Bhushan and published as RFC 114 on 16 April 1971. Until 1980, FTP was still running on NCP (Network Control Program) the predecessor of TCP/IP, the protocol was later replaced by a TCP/IP version, RFC 765 (June 1980). On September 1998, RFC 2428 added IPv6 support and defined a new type of passive mode.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Securinets CTF 2k19 Lost Flag Writeup</title>
+      <link>https://yassinecherief.com/posts/securinets-ctf-2019-lost-flag-writeup/</link>
+      <pubDate>Tue, 26 Mar 2019 17:37:37 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/securinets-ctf-2019-lost-flag-writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Description    Category Points Solves     Forensics 994 19    Description : Help me get back my flag !
+URL: https://web8.ctfsecurinets.com/
+After visiting the link above, we get a login page.We can login using admin/admin, but unfortunately the flag is deleted.
+Then I started searching in the website for any other infos, but with no success. the admin of the challenge (Tr&#39;GFx) said that bruteforcing directories is enough to solve the challenge, so I used dirsearch.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Streaming server using NGINX and nginx-rtmp-module</title>
+      <link>https://yassinecherief.com/posts/streaming-server-using-nginx-and-nginx-rtmp-module/</link>
+      <pubDate>Tue, 18 Dec 2018 01:55:45 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/streaming-server-using-nginx-and-nginx-rtmp-module/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server.
+          
+        
+        </description>
+    </item>
+    
+  </channel>
+</rss>

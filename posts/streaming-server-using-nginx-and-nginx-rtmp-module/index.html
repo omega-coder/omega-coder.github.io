@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        Streaming server using NGINX and nginx-rtmp-module ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server."
+/>
+<meta
+  name="keywords"
+  content="cybersecurity, security, networking, ctf, writeups, education, blog, algeria, algerian, student"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://yassinecherief.com/posts/streaming-server-using-nginx-and-nginx-rtmp-module/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://yassinecherief.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://yassinecherief.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://yassinecherief.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://yassinecherief.com/img/favicon.png" />
+
+
+<link href="https://yassinecherief.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Streaming server using NGINX and nginx-rtmp-module"/>
+<meta name="twitter:description" content="Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server."/>
+
+
+
+<meta property="og:title" content="Streaming server using NGINX and nginx-rtmp-module" />
+<meta property="og:description" content="Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yassinecherief.com/posts/streaming-server-using-nginx-and-nginx-rtmp-module/" />
+<meta property="article:published_time" content="2018-12-18T01:55:45+02:00" />
+<meta property="article:modified_time" content="2018-12-18T01:55:45+02:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >./1337.sh</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/posts">Posts</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">Streaming server using NGINX and nginx-rtmp-module</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2018-12-18
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by CHERIEF Yassine</span
+        >
+
+
+      
+        <span class="post-read-time"
+          >— 4 min read</span
+        >
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="https://yassinecherief.com/tags/nginx/">#nginx</a>&nbsp;
+        
+          <a href="https://yassinecherief.com/tags/streaming/">#streaming</a>&nbsp;
+        
+          <a href="https://yassinecherief.com/tags/tutorial/">#tutorial</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="introduction">Introduction</h1>
+<p>Most people who do streaming enjoy services like <a href="https://www.twitch.tv/">Twitch.tv</a> in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of <code>people streaming to your server</code>, or you want to stream to multiple places, or any other things that require having access to an actual <code>RTMP</code> stream from an <code>RTMP</code> server.
+In this guide we will cover the very basics of setting up a simple RTMP streaming server on an Ubuntu 16.04 server machine</p>
+<h1 id="what-is-rtmp-">What is RTMP ?</h1>
+<p>Real Time Messaging Protocol (RTMP) was initially developed by Macromedia, for streaming on-demand and live media to Adobe Flash applications. It is a TCP-based protocol which maintains persistent connections and is defined as a <code>statefull</code> protocol. This means that from the first time a client connects until the time it disconnects, the streaming server keeps track of the client’s actions. On the other side, HTTP is a <code>stateless</code> application protocol used to deliver hypermedia information across the Internet worldwide</p>
+<h2 id="advantages-of-http-over-rtmp">Advantages of HTTP over RTMP</h2>
+<ul>
+<li>Less likely to be blocked by firewalls at different levels in the network, RTMP uses default port 1935 which is sometimes blocked, espacially within corporate Firewalls.</li>
+<li>Supported by more CDNs.</li>
+<li>More expertise in customizing HTTP.</li>
+</ul>
+<h2 id="advantages-of-rtmp-over-http">Advantages of RTMP over HTTP</h2>
+<ul>
+<li>Can provide multicast support.</li>
+<li>Security and IP protection, using TLS/SSL or RTMPE.</li>
+<li><strong>Seeking</strong>: when dealing with long-duration media content, the viewer doesn’t have to wait for the video to load before jumping ahead, which is the case for HTTP-delivered videos.</li>
+<li><strong>Reconnect</strong>: when there is a network disruption, the viewer can re-establish a new connection, while the video continues playing from the buffer, as soon as the client re-connects, the buffer will begin filling to avoid disruption in either the video or audio.</li>
+</ul>
+<p><strong>A couple of things you can do with your own RTMP streaming server:</strong></p>
+<ul>
+<li>Stream to multiple external channels.</li>
+<li>import other people’s streams.</li>
+</ul>
+<p>Now, let’s start bulding our streaming server.<br>
+<code>NOTE</code></p>
+<blockquote>
+<p>Using Nginx with RTMP module requires compiling nginx from source;<!-- raw HTML omitted --> dont get afraid!, it’s not that hard</p>
+</blockquote>
+<h2 id="step1-----setting-up-a-server">Step1 &mdash; Setting up a server</h2>
+<p>The first step is to set up a server, we will be using an ubuntu server 16.04 LTS as our OS.
+you could install your server in a Raspberry Pi and it will run like a charm, because RTMP is extremely light on system resources.</p>
+<h2 id="step-2-----installing-nginx--nginx-rtmp-module">Step 2 &mdash; Installing Nginx + nginx-rtmp-module</h2>
+<p>Login to your server and make sure your user is in sudoers file, or just login as <code>root</code>.</p>
+<p><strong>1- Install Nginx dependencies</strong></p>
+<pre><code>sudo apt install build-essential libpcre3 libpcre3-dev libssl-dev
+</code></pre><p><strong>2- Clone nginx-rtmp-module</strong></p>
+<p>We recommend using <a href="https://github.com/sergey-dryabzhinsky/nginx-rtmp-module">this</a> forked module by <code>sergey-dryabzhinsky</code> . it’s being actively worked on and contains more fixes and improvements over the <a href="https://github.com/arut/nginx-rtmp-module">original one</a>.</p>
+<pre><code>git clone https://github.com/sergey-dryabzhinsky/nginx-rtmp-module.git
+</code></pre><p><strong>3- Download NGINX</strong></p>
+<pre><code>wget http://nginx.org/download/nginx-1.14.2.tar.gz
+tar -xf nginx-1.14.2.tar.gz
+cd nginx-1.14.2
+</code></pre><p>Now comes the compiling step.</p>
+<p><strong>4- Compile NGINX</strong></p>
+<pre><code>./configure --with-http_ssl_module --add-module=../nginx-rtmp-module
+make -j 1 
+sudo make install
+</code></pre><p><code>--add-module=../nginx-rtmp-module</code>: the <code>--add-module</code> argument must point to the correct path where nginx-rtmp-module is located.<br>
+<code>-j 1</code>: this is an optional argument for the make command, you can set it to the amount of cpu’s you have on your computer to accelerate the compilation process</p>
+<p>Now you should have a running installation of nginx with the nginx-rtmp module included.</p>
+<p>By default it installs to <code>/usr/local/nginx</code>, so to start the server run the following command:</p>
+<pre><code>sudo /usr/local/nginx/sbin/nginx
+</code></pre><h2 id="step-3-----configure-nginx-to-use-rtmp">Step 3 &mdash; Configure NGINX to use RTMP.</h2>
+<p>NGINX config file is located at <code>/usr/local/nginx/conf/nginx.conf</code>. Open the nginx configuration file using your favourite text editor <code>( it's VIM yeah; you guessed that right!!)</code></p>
+<pre><code>sudo vim /usr/local/nginx/conf/nginx.conf
+</code></pre><p>Add the following configuration to the end of the configuration file. <code>(Outside the http block)</code>.</p>
+<pre><code>rtmp {
+    server {
+        listen 1935;
+        chunk_size 4096;
+        max_connections 100;
+        ping 30s;
+        notify_method get;
+
+        application my_live {
+            live on;
+            hls on;
+            hls_path /tmp/hls;
+            hls_fragment 3s;
+            hls_playlist_length 60s;
+            
+            # Don't allow RTMP playback
+            deny play all;
+
+        }
+
+
+        application vod {
+            play /usr/local/nginx/rtmp;
+        }
+    }
+}
+</code></pre><p><code>NOTE: you have to create a folder where to put your videos.</code></p>
+<p>I created a folder called <code>rtmp</code> located in <code>/usr/local/nginx/</code>.</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1545171502/rtmp_vod.png" alt="rtmp-vod"></p>
+<p>Now restart your server!.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo /usr/local/nginx/sbin/nginx -s stop
+sudo /usr/local/nginx/sbin/nginx
+</code></pre></div><p>If your server is already running, you can just reload it, since we only made configurations changes.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo /usr/local/nginx/sbin/nginx -s reload
+</code></pre></div><h2 id="step-4-----testing">Step 4 &mdash; Testing</h2>
+<p>We can test our streaming server using VLC media player since it supports RTMP. We will only test the <code>Vod</code> (Video On Demand), we will leave <code>HLS</code> for the next time since it invloves <code>pushing</code> the stream from a remote location and then <code>pulling</code> it again from another location <code>(we can push the stream using the great ffmpeg!)</code></p>
+<p><code>NOTE: Make sure the streaming server can be reached from your machine</code></p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1545172346/ping_test_streaming.png" alt="ping_test_streaming"></p>
+<p>Let’s test our Vod application now.</p>
+<!-- raw HTML omitted -->
+<p>Our Vod application is working fine, in the next guide we will discuss live streaming using HLS and the great <code>ffmpeg</code> and we will also use <code>OBS studio</code> to push a live stream to the server.</p>
+<p>Thanks for reading!</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+              <span class="button previous">
+                <a href="https://yassinecherief.com/posts/securinets-ctf-2019-lost-flag-writeup/">
+                  <span class="button__icon">←</span>
+                  <span class="button__text">Securinets CTF 2k19 Lost Flag Writeup</span>
+                </a>
+              </span>
+            
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">Yassine CHERIEF</div>
+      
+  </div>
+</footer>
+
+<script src="https://yassinecherief.com/assets/main.js"></script>
+<script src="https://yassinecherief.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>
