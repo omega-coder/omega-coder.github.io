@@ -10,17 +10,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Yassine CHERIEF</copyright>
-    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 14:19:30 +0200</lastBuildDate>
     
 	<atom:link href="https://yassinecherief.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>forensics</title>
-      <link>https://yassinecherief.com/categories/forensics/</link>
-      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <title>misc</title>
+      <link>https://yassinecherief.com/categories/misc/</link>
+      <pubDate>Mon, 06 May 2019 14:19:30 +0200</pubDate>
       
-      <guid>https://yassinecherief.com/categories/forensics/</guid>
+      <guid>https://yassinecherief.com/categories/misc/</guid>
       <description>
         
           
@@ -38,7 +38,7 @@
     <item>
       <title>security</title>
       <link>https://yassinecherief.com/categories/security/</link>
-      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <pubDate>Mon, 06 May 2019 14:19:30 +0200</pubDate>
       
       <guid>https://yassinecherief.com/categories/security/</guid>
       <description>
@@ -58,9 +58,29 @@
     <item>
       <title>writeups</title>
       <link>https://yassinecherief.com/categories/writeups/</link>
-      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      <pubDate>Mon, 06 May 2019 14:19:30 +0200</pubDate>
       
       <guid>https://yassinecherief.com/categories/writeups/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>forensics</title>
+      <link>https://yassinecherief.com/categories/forensics/</link>
+      <pubDate>Sun, 05 May 2019 18:03:05 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/categories/forensics/</guid>
       <description>
         
           

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>
+        INS&#39;HACK :: 2019 :: Neurovision Misc 206 pts Writeup ::
+        Hello Friend — A simple theme for Hugo
+      </title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta
+  name="description"
+  content="Challenge details.    Category Points Solves Difficulty     Misc 206 20 Hard    1. Challenge description  We found this strange file from an AI Startup. Maybe it contains sensitive information&amp;hellip;Neurovision files
+ 2. SOLUTION #1 We are given an HDF5 file named neurovision-2d327377b559adb7fc04e0c3ee5c950c, executing the file command will tell us its an HDF5 file.
+file neurovision-2d327377b559adb7fc04e0c3ee5c950c # outputs  neurovision-2d327377b559adb7fc04e0c3ee5c950c: Hierarchical Data Format (version 5) data  For More on HDF5 structure HERE"
+/>
+<meta
+  name="keywords"
+  content="cybersecurity, security, networking, ctf, writeups, education, blog, algeria, algerian, student"
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://yassinecherief.com/posts/insahack-2019-neurovision-misc-206-pts-writeup/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://yassinecherief.com/assets/style.css" />
+
+<link rel="stylesheet" href="https://yassinecherief.com/style.css" />
+
+
+<link
+  rel="apple-touch-icon-precomposed"
+  sizes="144x144"
+  href="https://yassinecherief.com/img/apple-touch-icon-144-precomposed.png"
+/>
+<link rel="shortcut icon" href="https://yassinecherief.com/img/favicon.png" />
+
+
+<link href="https://yassinecherief.com/assets/fonts/Inter-Italic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Regular.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Medium.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-MediumItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-Bold.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+<link href="https://yassinecherief.com/assets/fonts/Inter-BoldItalic.woff2" rel="preload" type="font/woff2" as="font" crossorigin="">
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="INS&#39;HACK :: 2019 :: Neurovision Misc 206 pts Writeup"/>
+<meta name="twitter:description" content="Challenge details.    Category Points Solves Difficulty     Misc 206 20 Hard    1. Challenge description  We found this strange file from an AI Startup. Maybe it contains sensitive information&hellip;Neurovision files
+ 2. SOLUTION #1 We are given an HDF5 file named neurovision-2d327377b559adb7fc04e0c3ee5c950c, executing the file command will tell us its an HDF5 file.
+file neurovision-2d327377b559adb7fc04e0c3ee5c950c # outputs  neurovision-2d327377b559adb7fc04e0c3ee5c950c: Hierarchical Data Format (version 5) data  For More on HDF5 structure HERE"/>
+
+
+
+<meta property="og:title" content="INS&#39;HACK :: 2019 :: Neurovision Misc 206 pts Writeup" />
+<meta property="og:description" content="Challenge details.    Category Points Solves Difficulty     Misc 206 20 Hard    1. Challenge description  We found this strange file from an AI Startup. Maybe it contains sensitive information&hellip;Neurovision files
+ 2. SOLUTION #1 We are given an HDF5 file named neurovision-2d327377b559adb7fc04e0c3ee5c950c, executing the file command will tell us its an HDF5 file.
+file neurovision-2d327377b559adb7fc04e0c3ee5c950c # outputs  neurovision-2d327377b559adb7fc04e0c3ee5c950c: Hierarchical Data Format (version 5) data  For More on HDF5 structure HERE" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yassinecherief.com/posts/insahack-2019-neurovision-misc-206-pts-writeup/" />
+<meta property="article:published_time" content="2019-05-06T14:19:30+02:00" />
+<meta property="article:modified_time" content="2019-05-06T14:19:30+02:00" /><meta property="og:site_name" content="Hello Friend" />
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a
+  href="/"
+  class="logo"
+  style="text-decoration: none;"
+>
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span>
+    <span class="logo__text"
+      >./1337.sh</span
+    >
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/posts">Posts</a></li>
+        
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+      
+        <ul class="menu__sub-inner">
+          <li class="menu__sub-inner-more-trigger">
+            Show more
+            <span class="menu__sub-inner-more-trigger-icon"
+              ><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367" />
+</svg>
+</span
+            >
+          </li>
+          <ul class="menu__sub-inner-more hidden">
+            
+              
+                <li><a href="/categories">Categories</a></li>
+              
+            
+          </ul>
+        </ul>
+      
+      
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/posts">Posts</a></li>
+      
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+      
+        <li><a href="/categories">Categories</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  />
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  
+  
+
+  <div class="post">
+    <h1 class="post-title">INS&rsquo;HACK :: 2019 :: Neurovision Misc 206 pts Writeup</h1>
+    <div class="post-meta">
+      
+        <span class="post-date">
+          2019-05-06
+        </span>
+
+        
+          
+        
+      
+
+      
+        <span class="post-author"
+          >— Written by CHERIEF Yassine</span
+        >
+
+
+      
+        <span class="post-read-time"
+          >— 7 min read</span
+        >
+      
+    </div>
+
+    
+      <span class="post-tags">
+        
+          <a href="https://yassinecherief.com/tags/neural-network/">#Neural-Network</a>&nbsp;
+        
+      </span>
+    
+
+    
+
+    <div class="post-content">
+      
+      <h1 id="challenge-details">Challenge details.</h1>
+<table>
+<thead>
+<tr>
+<th><strong>Category</strong></th>
+<th><strong>Points</strong></th>
+<th><strong>Solves</strong></th>
+<th><strong>Difficulty</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Misc</td>
+<td>206</td>
+<td>20</td>
+<td><strong>Hard</strong></td>
+</tr>
+</tbody>
+</table>
+<h1 id="1-challenge-description">1. Challenge description</h1>
+<blockquote>
+<p>We found this strange file from an AI Startup. Maybe it contains sensitive information&hellip;<!-- raw HTML omitted --><!-- raw HTML omitted --><a href="https://static.ctf.insecurity-insa.fr/dc1c30c75ea98475b324890d81da1f92b5ab04e8.tar.gz">Neurovision files</a></p>
+</blockquote>
+<h1 id="2-solution-1">2. SOLUTION #1</h1>
+<p>We are given an <code>HDF5</code> file named <code>neurovision-2d327377b559adb7fc04e0c3ee5c950c</code>, executing the <code>file</code> command will tell us its an <code>HDF5</code> file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">file neurovision-2d327377b559adb7fc04e0c3ee5c950c
+<span style="color:#75715e"># outputs </span>
+neurovision-2d327377b559adb7fc04e0c3ee5c950c: Hierarchical Data Format <span style="color:#f92672">(</span>version 5<span style="color:#f92672">)</span> data
+</code></pre></div><blockquote>
+<p>For More on HDF5 structure  <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format">HERE</a></p>
+</blockquote>
+<p>executing <code>strings</code> on the model file (I believe its a model), we get the following:</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557152375/Screenshot_2019-05-06_15-42-46.png" alt="strings_command_results"></p>
+<p>some interesting infos.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;class_name&#34;</span>: <span style="color:#e6db74">&#34;Sequential&#34;</span>,
+    <span style="color:#f92672">&#34;config&#34;</span>: {
+        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;sequential_1&#34;</span>,
+        <span style="color:#f92672">&#34;layers&#34;</span>: [{
+            <span style="color:#f92672">&#34;class_name&#34;</span>: <span style="color:#e6db74">&#34;Flatten&#34;</span>,
+            <span style="color:#f92672">&#34;config&#34;</span>: {
+                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;flatten_1&#34;</span>,
+                <span style="color:#f92672">&#34;trainable&#34;</span>: <span style="color:#66d9ef">true</span>,
+                <span style="color:#f92672">&#34;batch_input_shape&#34;</span>: [<span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>],
+                <span style="color:#f92672">&#34;dtype&#34;</span>: <span style="color:#e6db74">&#34;float32&#34;</span>,
+                <span style="color:#f92672">&#34;data_format&#34;</span>: <span style="color:#e6db74">&#34;channels_last&#34;</span>
+            }
+        }, {
+            <span style="color:#f92672">&#34;class_name&#34;</span>: <span style="color:#e6db74">&#34;Dense&#34;</span>,
+            <span style="color:#f92672">&#34;config&#34;</span>: {
+                <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;dense_1&#34;</span>,
+                <span style="color:#f92672">&#34;trainable&#34;</span>: <span style="color:#66d9ef">true</span>,
+                <span style="color:#f92672">&#34;units&#34;</span>: <span style="color:#ae81ff">1</span>,
+                <span style="color:#f92672">&#34;activation&#34;</span>: <span style="color:#e6db74">&#34;sigmoid&#34;</span>,
+                <span style="color:#f92672">&#34;use_bias&#34;</span>: <span style="color:#66d9ef">true</span>,
+                <span style="color:#f92672">&#34;kernel_initializer&#34;</span>: {
+                    <span style="color:#f92672">&#34;class_name&#34;</span>: <span style="color:#e6db74">&#34;VarianceScaling&#34;</span>,
+                    <span style="color:#f92672">&#34;config&#34;</span>: {
+                        <span style="color:#f92672">&#34;scale&#34;</span>: <span style="color:#ae81ff">1.0</span>,
+                        <span style="color:#f92672">&#34;mode&#34;</span>: <span style="color:#e6db74">&#34;fan_avg&#34;</span>,
+                        <span style="color:#f92672">&#34;distribution&#34;</span>: <span style="color:#e6db74">&#34;uniform&#34;</span>,
+                        <span style="color:#f92672">&#34;seed&#34;</span>: <span style="color:#66d9ef">null</span>
+                    }
+                },
+                <span style="color:#f92672">&#34;bias_initializer&#34;</span>: {
+                    <span style="color:#f92672">&#34;class_name&#34;</span>: <span style="color:#e6db74">&#34;Zeros&#34;</span>,
+                    <span style="color:#f92672">&#34;config&#34;</span>: {}
+                },
+                <span style="color:#f92672">&#34;kernel_regularizer&#34;</span>: <span style="color:#66d9ef">null</span>,
+                <span style="color:#f92672">&#34;bias_regularizer&#34;</span>: <span style="color:#66d9ef">null</span>,
+                <span style="color:#f92672">&#34;activity_regularizer&#34;</span>: <span style="color:#66d9ef">null</span>,
+                <span style="color:#f92672">&#34;kernel_constraint&#34;</span>: <span style="color:#66d9ef">null</span>,
+                <span style="color:#f92672">&#34;bias_constraint&#34;</span>: <span style="color:#66d9ef">null</span>
+            }
+        }]
+    }
+}
+</code></pre></div><p>We have the input size which seems to be taking a 2-dimentional array (68x218) and outputs a single number between <code>0</code> and <code>1</code>, so we can guess that the model takes a 68x218 image and outputs some kind of <code>probability maybe</code>. one more thing, we are dealing with a single layer Neural Network (<code>No Hidden Layers</code>).</p>
+<p>this is clearly a <a href="https://keras.io/"><code>Keras</code></a> Model. Let&rsquo;s load the model using the Keras python library and see wat we can do.</p>
+<p>If you don&rsquo;t have the Keras Library installed on PC, you can work in <a href="https://colab.research.google.com/">Colab</a>, just open a Python3 notebook and start using Keras and other python libraries.</p>
+<p><code>NOTE: Pillow and numpy are also required if you are using your own computer</code></p>
+<h3 id="21-load-the-model-and-check-layers-and-weights">2.1 Load the Model and check layers and weights</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> keras <span style="color:#f92672">import</span> load_model
+
+model <span style="color:#f92672">=</span> load_model(<span style="color:#e6db74">&#34;neurovision-2d327377b559adb7fc04e0c3ee5c950c&#34;</span>)
+</code></pre></div><p>Let&rsquo;s check the layers;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> model<span style="color:#f92672">.</span>layers
+[<span style="color:#f92672">&lt;</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>core<span style="color:#f92672">.</span>Flatten object at <span style="color:#ae81ff">0x7f2b069de860</span><span style="color:#f92672">&gt;</span>, <span style="color:#f92672">&lt;</span>keras<span style="color:#f92672">.</span>layers<span style="color:#f92672">.</span>core<span style="color:#f92672">.</span>Dense object at <span style="color:#ae81ff">0x7f2b069de9b0</span><span style="color:#f92672">&gt;</span>]
+<span style="color:#f92672">&gt;&gt;&gt;</span> model<span style="color:#f92672">.</span>layers[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>input_shape
+(None, <span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> model<span style="color:#f92672">.</span>layers[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>output_shape
+(None, <span style="color:#ae81ff">1</span>)
+</code></pre></div><p>What about the weights</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> model<span style="color:#f92672">.</span>get_weights()
+[array([[<span style="color:#f92672">-</span><span style="color:#ae81ff">4.2567684e-05</span>],
+       [<span style="color:#f92672">-</span><span style="color:#ae81ff">4.2567684e-05</span>],
+       [<span style="color:#f92672">-</span><span style="color:#ae81ff">4.2567684e-05</span>],
+       <span style="color:#f92672">...</span>,
+       [<span style="color:#f92672">-</span><span style="color:#ae81ff">4.2567684e-05</span>],
+       [<span style="color:#f92672">-</span><span style="color:#ae81ff">4.2567684e-05</span>],
+       [<span style="color:#f92672">-</span><span style="color:#ae81ff">4.2567684e-05</span>]], dtype<span style="color:#f92672">=</span>float32), array([<span style="color:#ae81ff">0.</span>], dtype<span style="color:#f92672">=</span>float32)]
+
+</code></pre></div><p>We can notice that all weights have the same <code>absolute value</code>, some are <code>positive</code> and some are <code>negative</code> which is kinda weird.</p>
+<p>Let&rsquo;s try <code>reshaping</code> the weights array to a 2D array of size 68x218 and creating an image by turning all the negative weights to black pixels and all the positive weights to white pixels.</p>
+<p>Here is how you can do it using the Pillow Imaging Library</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> keras
+<span style="color:#f92672">from</span> keras.models <span style="color:#f92672">import</span> load_model
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+
+<span style="color:#75715e"># Loading Model</span>
+model <span style="color:#f92672">=</span> load_model(<span style="color:#e6db74">&#34;neurovision-2d327377b559adb7fc04e0c3ee5c950c&#34;</span>)
+
+<span style="color:#75715e"># getting weights and transforming them to values of 0s and 255</span>
+pixel_values_ <span style="color:#f92672">=</span> (model<span style="color:#f92672">.</span>get_weights()[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>uint8) <span style="color:#f92672">*</span> <span style="color:#ae81ff">255</span>
+
+<span style="color:#75715e"># reshape flattened array</span>
+reshaped_pixels <span style="color:#f92672">=</span> pixel_values_<span style="color:#f92672">.</span>reshape((<span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>))
+
+<span style="color:#75715e"># Create an image from a numpy 2d array</span>
+flag <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>fromarray(reshaped_pixels)
+
+<span style="color:#75715e"># save the image, if you are on Colab, you can either export image bytes or save it</span>
+<span style="color:#75715e"># you will find it in /content folder</span>
+flag<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#39;flag.png&#39;</span>)
+</code></pre></div><p>Here is an example from <code>Colab</code>.</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557155707/Screenshot_2019-05-06_16-37-10.png" alt="colab_solution_keras"></p>
+<p><code>eXecute</code> and get your flag :D</p>
+<p>Greetz to <a href="https://github.com/youben11">@youben11</a> for his <code>great</code> ideas and contribution.</p>
+<p><code>INSA{0v3erfitt3d_th3_Fl4g!}</code></p>
+<h2 id="solution-2">SOLUTION #2</h2>
+<p><code>This solution generates a random image in a certain way so that the output layer (Which is a scalar output) of our neural network converges to the output we want</code></p>
+<p>We already stated in Solution #1 that the output is a value in this interval <code>[0, 1]</code> (<em>Could be interpreted as a probability</em>)</p>
+<p>So, We have a Keras model (.hdf5 file) for a neural network with a single scalar output, for which the activation function is <code>sigmoid</code>, so the output is just the result of the <code>sigmoid</code> function applied to the <code>weighted sum</code> of the input layer which appears to be an image with the size of <code>68x218</code>, at least it is a 2D array of size 68 by 218.</p>
+<h3 id="uabout-the-sigmoid-functionu"><!-- raw HTML omitted -->About the sigmoid function<!-- raw HTML omitted --></h3>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557190466/3-s2.0-B9780080499451500083-f03-02-9780080499451.jpg" alt="sigmoid_function_plot"></p>
+<p>A <strong>sigmoid</strong> function is a mathematical function having a characteristic <strong>&ldquo;S&rdquo;-shaped</strong> curve or sigmoid curve. Often, sigmoid function refers to the special case of the <strong>logistic function</strong> shown in the above figure and defined by the formula,</p>
+<p>$$ S(x) = \frac{1}{1 + e^{-x}} = \frac{e^x}{1 + e^x} $$</p>
+<h4 id="uwhen-to-use-sigmoid-activation-function-u"><!-- raw HTML omitted -->When to use Sigmoid Activation Function ?<!-- raw HTML omitted --></h4>
+<p>One of the <strong>main reasons</strong> to use the <code>sigmoid function</code> is because it exists in between <code>0</code> and <code>1</code>. Thus, it is especially used for models where we have to predict the <code>probability</code> as an output.Since the probability of anything exists between <code>0</code> and <code>1</code>, then Sigmoid is the best choice.</p>
+<p><code>NOTE: the use of a logistic sigmoid function can cause a neural network to get stuck at the training</code></p>
+<p>As we said above, we will be generating random image and changing it so that the output of our neural network converges to <code>1</code> which is our desired value (<code>Probability of 1 that the flag image is correct</code>).</p>
+<h3 id="uhow-do-we-know-how-to-change-the-image-u"><!-- raw HTML omitted -->How do we know how to change the image ?<!-- raw HTML omitted --></h3>
+<p>We will be calculating the <code>Gradient</code> of our first layer, this way we know how to evolve the image so we can get an output that <code>converges to 1</code> which is our desired value.</p>
+<p>Image is changed using the equation below,</p>
+<p>$$ ImageMatrix = ImageMatrix - (Gradient * learning rate) $$</p>
+<p>$$ ImageMatrix \quad -=\quad(Gradient * learning rate) $$</p>
+<h3 id="ulets-code-the-solutionu"><!-- raw HTML omitted -->Let&rsquo;s code the solution<!-- raw HTML omitted --></h3>
+<p>Let&rsquo;s start by loading our model and defining our input and output layers.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> keras
+<span style="color:#f92672">from</span> keras.models <span style="color:#f92672">import</span> load_model
+
+model <span style="color:#f92672">=</span> load_model(<span style="color:#e6db74">&#39;neurovision-2d327377b559adb7fc04e0c3ee5c950c&#39;</span>)
+in_layer <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>layers[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>input    <span style="color:#75715e">#input layer shape=(?, 68, 218)</span>
+out_layer <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>layers[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>output  <span style="color:#75715e">#output layer shape=(?, 1)</span>
+</code></pre></div><p>Now, we need to define the gradient and cost functions using the Keras predefined function</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+<span style="color:#f92672">from</span> keras.losses <span style="color:#f92672">import</span> mean_squared_error
+<span style="color:#f92672">from</span> keras <span style="color:#f92672">import</span> backend
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">COST FUNCTION
+</span><span style="color:#e6db74">cost function is defined as the mean squared error of the output
+</span><span style="color:#e6db74">layer and the value 1 which our desired value
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+cost <span style="color:#f92672">=</span> mean_squared_error(out_layer, <span style="color:#ae81ff">1</span>)
+
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">GRADIENT FUNCTION
+</span><span style="color:#e6db74">Gradient function is defined with parameters cost function and 
+</span><span style="color:#e6db74">our model input layer
+</span><span style="color:#e6db74">We will use keras backend to define the gradients.
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+grad <span style="color:#f92672">=</span> backend<span style="color:#f92672">.</span>gradients(cost, in_layer)[<span style="color:#ae81ff">0</span>]
+
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">WE WILL DEFINE A FUNCTION TO RETURN COST AND GRADIENT
+</span><span style="color:#e6db74">WHEN INPUT IS FED
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+get_cost_and_grad <span style="color:#f92672">=</span> backend<span style="color:#f92672">.</span>function([in_layer], [cost, grad])
+</code></pre></div><p>Now, the cost and gradient having been defined, let&rsquo;s create a random image using numpy and iterate to modify the first image and until achieving a <code>target cost</code> that we will be defining below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># generate a random image using numpy</span>
+image <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>)
+desired_cost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>  <span style="color:#75715e"># define the target cost</span>
+lr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>           <span style="color:#75715e"># set learning rate to 1000, ti will get good results</span>
+im_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>        <span style="color:#75715e"># this is used to keep count of intermediate images</span>
+
+<span style="color:#66d9ef">while</span> True:
+  <span style="color:#75715e"># get cost and gradient values</span>
+  cost_, grad_ <span style="color:#f92672">=</span> get_cost_and_grad([image])
+  
+  <span style="color:#66d9ef">if</span> cost_ <span style="color:#f92672">&lt;</span> desired_cost:
+    <span style="color:#66d9ef">break</span>
+  <span style="color:#75715e"># alter image so output converges to 1</span>
+  image <span style="color:#f92672">-=</span> (grad_ <span style="color:#f92672">*</span> lr)
+  <span style="color:#75715e"># save image (not nessessary)</span>
+  im <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>fromarray(((image)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>uint8) <span style="color:#f92672">*</span> <span style="color:#ae81ff">255</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>))
+  im<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;pngs/out_&#34;</span><span style="color:#f92672">+</span>str(im_count)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;.png&#34;</span>)
+  im_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</code></pre></div><p>The above code will save save all intermediate images as PNG images, You will find your flag in some of the images at an advanced iteration level.</p>
+<p>A Better solution to make a <code>GIF</code> that shows how the flag evolves in time. Here is the code for it. Just make sure you have <code>Pillow</code> installed.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Imports of previous codes here
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<span style="color:#f92672">import</span> keras
+<span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+<span style="color:#f92672">from</span> numpy <span style="color:#f92672">import</span> numpy
+
+<span style="color:#75715e"># generate a random image.</span>
+image <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>rand(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>float32)
+desired_cost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>    <span style="color:#75715e"># desired cost is gonna be 0.1</span>
+lr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>             <span style="color:#75715e"># Set the learning rate to 1000</span>
+
+images_list <span style="color:#f92672">=</span> [] <span style="color:#75715e"># make a list to store image instances</span>
+
+<span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">Iterate until calculated cost &lt;= taegeted_cost
+</span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+<span style="color:#66d9ef">while</span> True:
+  <span style="color:#75715e"># claculate both cost an gradient</span>
+  cost_, grad_ <span style="color:#f92672">=</span> get_cost_and_grad([image])
+  <span style="color:#66d9ef">if</span> cost_ <span style="color:#f92672">&lt;</span> desired_cost:
+    <span style="color:#66d9ef">break</span>
+  
+  <span style="color:#75715e"># updating image matrix</span>
+  image <span style="color:#f92672">-=</span> (grad_ <span style="color:#f92672">*</span> lr)
+  <span style="color:#75715e"># reshaping image to be stored (Needs Pillow)</span>
+  im <span style="color:#f92672">=</span> Image<span style="color:#f92672">.</span>fromarray(((image)<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>uint8) <span style="color:#f92672">*</span> <span style="color:#ae81ff">255</span>)<span style="color:#f92672">.</span>reshape(<span style="color:#ae81ff">68</span>, <span style="color:#ae81ff">218</span>))
+  images_list<span style="color:#f92672">.</span>append(im)
+
+images_list[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>save(<span style="color:#e6db74">&#34;animated_flag.gif&#34;</span>, save_all<span style="color:#f92672">=</span>True, append_images<span style="color:#f92672">=</span>images_list[<span style="color:#ae81ff">1</span>:], duration<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, loop<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+
+</code></pre></div><p>The above code will generate a <code>GIF</code> showing the evolution of the flag starting from a random image to a full <code>flag</code>.</p>
+<p><img src="https://res.cloudinary.com/https-omega-coder-github-io/image/upload/v1557400189/animated_flag.gif" alt="animated_flag"></p>
+<p>I will include the whole python script later.</p>
+<p>Thanks for Reading !</p>
+
+    </div>
+    
+      
+        <div class="pagination">
+          <div class="pagination__title">
+            <span class="pagination__title-h"
+              >Read other posts</span
+            >
+            <hr />
+          </div>
+          <div class="pagination__buttons">
+            
+            
+              <span class="button next">
+                <a href="https://yassinecherief.com/posts/inshack-you-shall-not-pass-forensics-330-writeup/">
+                  <span class="button__text">INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup</span>
+                  <span class="button__icon">→</span>
+                </a>
+              </span>
+            
+          </div>
+        </div>
+      
+    
+
+    
+      
+        
+
+      
+    
+  </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">Yassine CHERIEF</div>
+      
+  </div>
+</footer>
+
+<script src="https://yassinecherief.com/assets/main.js"></script>
+<script src="https://yassinecherief.com/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>

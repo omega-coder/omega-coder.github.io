@@ -10,10 +10,32 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Yassine CHERIEF</copyright>
-    <lastBuildDate>Sun, 05 May 2019 18:03:05 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 06 May 2019 14:19:30 +0200</lastBuildDate>
     
 	<atom:link href="https://yassinecherief.com/categories/writeups/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>INS&#39;HACK :: 2019 :: Neurovision Misc 206 pts Writeup</title>
+      <link>https://yassinecherief.com/posts/insahack-2019-neurovision-misc-206-pts-writeup/</link>
+      <pubDate>Mon, 06 May 2019 14:19:30 +0200</pubDate>
+      
+      <guid>https://yassinecherief.com/posts/insahack-2019-neurovision-misc-206-pts-writeup/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          Challenge details.    Category Points Solves Difficulty     Misc 206 20 Hard    1. Challenge description  We found this strange file from an AI Startup. Maybe it contains sensitive information&amp;hellip;Neurovision files
+ 2. SOLUTION #1 We are given an HDF5 file named neurovision-2d327377b559adb7fc04e0c3ee5c950c, executing the file command will tell us its an HDF5 file.
+file neurovision-2d327377b559adb7fc04e0c3ee5c950c # outputs  neurovision-2d327377b559adb7fc04e0c3ee5c950c: Hierarchical Data Format (version 5) data  For More on HDF5 structure HERE
+          
+        
+        </description>
+    </item>
     
     <item>
       <title>INShAck 2019 :: You Shall Not Pass :: Forensics 330 Writeup</title>
