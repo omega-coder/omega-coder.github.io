@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hello Friend</title>
+    <title>CHERIEF Yassine</title>
     
     
     
     <link>https://yassinecherief.com/</link>
-    <description>Recent content on Hello Friend</description>
+    <description>Recent content on CHERIEF Yassine</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Yassine CHERIEF</copyright>
@@ -203,6 +203,26 @@ Then I started searching in the website for any other infos, but with no success
         
         
           Introduction Most people who do streaming enjoy services like Twitch.tv in order to deliver video for viewers, which is a pretty good solution, but when it comes to having more control over your streams, or when you take in consideration the ability of people streaming to your server, or you want to stream to multiple places, or any other things that require having access to an actual RTMP stream from an RTMP server.
+          
+        
+        </description>
+    </item>
+    
+    <item>
+      <title>Archive</title>
+      <link>https://yassinecherief.com/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://yassinecherief.com/archive/</guid>
+      <description>
+        
+          
+          
+          
+        
+        
+        
+          
           
         
         </description>
