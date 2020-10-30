@@ -4,7 +4,6 @@
     height: 1rem;
     background: #149414;
     margin-left: 5px;
-    border-radius: 1px;
     -webkit-animation: cursor 1s infinite;
     animation: cursor 1s infinite;
 }
